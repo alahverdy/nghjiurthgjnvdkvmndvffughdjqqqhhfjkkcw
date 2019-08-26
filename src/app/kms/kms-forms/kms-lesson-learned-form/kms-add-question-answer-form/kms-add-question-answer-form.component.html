@@ -1,0 +1,92 @@
+    <div class="row">
+      <div class="col-md-12">
+        <h2>افزودن {{ selectedTitle }} جدید</h2>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <form [formGroup]="formGp" *ngIf="checking">
+          <div class="row" *ngIf="!passedData">
+            <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field>
+                  <input class="form-control" matInput formControlName="Title"
+                         [placeholder]="'عنوان ' + selectedTitle" required>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Title').hasError('required')">
+                  * لطفا عنوان {{ selectedTitle }} را وارد نمایید <strong>(اجباری)</strong>
+                  </mat-error>
+                  <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Title').hasError('minlength')">
+                  * حداقل 5 کاراکتر وارد نمایید<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!passedData">
+            <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field *ngIf="posts">
+                  <mat-select class="form-control" [formControl]="bankMultiCtrl2" placeholder="انتخاب درس آموخته های مرتبط..." (selectionChange)="onSelectionChange()" [multiple]="true" #multiSelect>
+                    <ngx-mat-select-search [placeholderLabel]="'عنوان درس آموخته مورد نظر خود را جستجو کنید...'" [noEntriesFoundLabel]="'درس آموخته ای پیدا نشد...'" [formControl]="bankMultiFilterCtrl2"></ngx-mat-select-search>
+                    <mat-option *ngFor="let post of filteredBanksMulti2 | async" [value]="post.ID">
+                      {{ post.Title }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field>
+                      <textarea
+                        class="form-control"
+                        matInput
+                        matTextareaAutosize
+                        matAutosizeMinRows="3"
+                        matAutosizeMaxRows="8"
+                        formControlName="Desc"
+                        [placeholder]="'متن ' + selectedTitle" required>
+            </textarea>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Desc').hasError('required')">
+                  * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                  </mat-error>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Desc').hasError('minlength')">
+                  * حداقل 20 کاراکتر وارد نمایید<strong>!</strong>
+                  </mat-error>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Desc').hasError('maxlength')">
+                  * حداکثر 2000 کاراکتر وارد نمایید<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <!--<div class="form-group">-->
+                <!--<label for="c4">متن {{ selectedTitle }}<span style="color: #da345a;">*</span></label>-->
+                <!--<ckeditor [editor]="Editor" [(ngModel)]="model.editorData" id="c4"></ckeditor>-->
+                <!--<mat-error style="text-align: right;color: #0f456d;" *ngIf="formGp.get('Desc').hasError('required')">-->
+                <!--* وارد کردن این فیلد الزامی می باشد<strong>!</strong>-->
+                <!--</mat-error>-->
+                <!--<mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Desc').hasError('minlength')">-->
+                  <!--* حداقل 20 کاراکتر وارد نمایید<strong>!</strong>-->
+                <!--</mat-error>-->
+                <!--<mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Desc').hasError('maxlength')">-->
+                  <!--* حداکثر 2000 کاراکتر وارد نمایید<strong>!</strong>-->
+                <!--</mat-error>-->
+              <!--</div>-->
+            </div>
+          </div>
+        </form>
+        <hr>
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <button *ngIf="passedData" class="btn btn-primary" [mat-dialog-close]="formGp" style="width: 100%">افزودن {{ selectedTitle }}</button>
+              <button *ngIf="!passedData" class="btn btn-primary" (click)="onAddQuestion()" style="width: 100%">افزودن {{ selectedTitle }}</button>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>

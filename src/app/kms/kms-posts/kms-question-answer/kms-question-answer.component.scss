@@ -1,0 +1,56 @@
+h4 {
+  font-family: IranSans;
+  direction: rtl;
+  text-align: justify;
+  font-size: 27px;
+}
+
+.main-mat-card-kms-qa {
+  box-shadow: -5px -2px 12px 0px rgba(0, 0, 0, 0.4), -1px 4px 1px 0px rgba(0, 0, 0, 0.4), 3px 3px 4px 1px rgba(0, 0, 0, 0.46) !important;
+}
+
+mat-card {
+  font-family: IranSans;
+  direction: rtl;
+  text-align: justify;
+}
+
+.mat-card-kms-author {
+  box-shadow: 0 -1px 1px -1px #1c4c7e, 0 1px 1px 0 rgba(27, 91, 121, 0.14), 0 1px 3px 0 #155489;
+}
+
+.kms-qa-box {
+  border-bottom: 1px solid #336e83;
+  padding: 30px 15px;
+  margin: 10px 0;
+  font-family: IranSans;
+  direction: rtl;
+  text-align: justify;
+  line-height: 40px;
+}
+
+.kms-qa-box:last-child {
+  border-bottom: none;
+}
+
+#kms-question-box {
+  border-bottom: none;
+  padding: 15px;
+}
+
+.fa-pen-nib {
+  color: #5384ae;
+  padding-left: 7px;
+}
+
+
+.fa-clock {
+  color: #b66363;
+  padding-left: 7px;
+}
+
+.fa-file-signature {
+  float: left;
+  color: #3f79ab;
+  cursor: pointer;
+}

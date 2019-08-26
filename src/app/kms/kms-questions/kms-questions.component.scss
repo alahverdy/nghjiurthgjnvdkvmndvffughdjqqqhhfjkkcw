@@ -1,0 +1,37 @@
+h2 {
+  font-family: IranSans;
+  text-align: center;
+  direction: rtl;
+  padding: 10px 25px;
+}
+
+.fas {
+  cursor: default !important;
+  font-size: 23px;
+  color: #fff;
+  margin: 7px 11px;
+}
+
+.card-avatar {
+  border: 1px solid #159CDA;
+  background: #159CDA;
+}
+
+.card-avatar-special {
+  border: 1px solid #da345a;
+  background: #da345a;
+}
+
+.col-md-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding: 15px;
+}
+
+mat-card {
+  box-shadow: -5px -2px 12px 0px rgba(0, 0, 0, 0.4), -1px 4px 1px 0px rgba(0, 0, 0, 0.4), 3px 3px 4px 1px rgba(0, 0, 0, 0.46) !important;
+  font-family: IranSans;
+  margin: 10px 0;
+  direction: rtl;
+  text-align: justify;
+}

@@ -1,0 +1,36 @@
+    <div class="row">
+      <div class="col-md-12">
+        <h2>ارجاع به داور</h2>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <form [formGroup]="formGp" *ngIf="checking">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" *ngIf="judges">
+                <mat-form-field>
+                  <mat-select class="form-control" placeholder="داوران" formControlName="Judges" multiple>
+                    <mat-option *ngFor="let judge of judges" [value]="judge">{{judge.User.Title}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                  <!--<mat-error style="text-align: right;" *ngIf="formGp.get('Judges').hasError('required')">-->
+                  <!--* لطفا داور انتخاب کنید <strong>(اجباری)</strong>-->
+                  <!--</mat-error>-->
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <button class="btn btn-primary" [mat-dialog-close]="formGp" style="width: 100%">ارجاع به داوران</button>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2"></div>
+    </div>

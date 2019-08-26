@@ -1,0 +1,365 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// KMS mine css Codes
+@font-face {
+  font-family: 'IranSans';
+  src: url('http://rpmo.rai.ir/SitePages/main/assets/fonts/IRANSansWeb(FaNum).woff2');
+  src: local('IranSansNum'), url('http://rpmo.rai.ir/SitePages/main/assets/fonts/IRANSansWeb(FaNum).woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+//@font-face {
+//  font-family: 'Shabnam';
+//  src: url('./assets/fonts/Shabnam.eot');
+//  src: local('Shabnam'), url('./assets/fonts/IRANSansWeb(FaNum).woff2') format('woff2');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+//@font-face {
+//  font-family: 'IranSans';
+//  src: url('./assets/fonts/IRANSansWeb(FaNum).woff2');
+//  src: local('IranSansNum'), url('./assets/fonts/IRANSansWeb(FaNum).woff2') format('woff2');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+//@font-face {
+//  font-family: 'IranSans';
+//  src: url('./assets/fonts/IRANSansWeb(FaNum)_Bold.woff2');
+//  src: local('IranSansNum'), url('./assets/fonts/IRANSansWeb(FaNum)_Bold.woff2') format('woff2');
+//  font-weight: bold;
+//  font-style: normal;
+//}
+
+.mat-tab-label .mat-tab-label-content {
+  font-family: IranSans !important;
+}
+
+.mat-tab-body.mat-tab-body-active {
+  text-align: justify;
+  direction: rtl;
+  line-height: 35px;
+  padding-top: 25px;
+}
+
+/* .mat-form-field-underline {
+  display: none;
+} */
+/* .mat-form-field-label {
+  left: -5px !important;
+  color: #0f456d !important;
+}
+.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  -webkit-transform: translateY(-1.78125em) scale(.75) perspective(100px) translateZ(.001px);
+  transform: translateY(-1.78125em) scale(.75) perspective(100px) translateZ(.001px) !important;
+  -ms-transform: translateY(-1.78125em) scale(.75);
+  width: 133.33333%;
+}
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  top: 1.78125em !important;
+} */
+.form-control {
+  display: block !important;
+  width: 100% !important;
+  padding: .375rem .75rem !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  color: #495057 !important;
+  background-color: #fff !important;
+  background-clip: padding-box !important;
+  border: none !important;
+  border-radius: .25rem !important;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
+  font-family: IranSans;
+}
+.mat-form-field {
+  width: 100%;
+  text-align: justify !important;
+  font-family: IranSans;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.mat-select-value {
+  font-family: IranSans;
+}
+
+.innerClass table {
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.innerClass table td {
+  padding: 8px;
+}
+
+.innerClass a {
+  color: #0066c0 !important;
+  text-decoration: none;
+}
+
+.innerClass .far {
+  color: #16587a !important;
+}
+
+.innerClass .fas {
+  color: #09364d !important;
+}
+
+.kms-mat-card-basic {
+  box-shadow: -5px -2px 12px 0px rgba(0, 0, 0, 0.4), -1px 4px 1px 0px rgba(0, 0, 0, 0.4), 3px 3px 4px 1px rgba(0, 0, 0, 0.46) !important;
+  background: rgba(209,228,240,1);
+  background: -moz-linear-gradient(top, rgba(209,228,240,1) 0%, rgba(240,240,240,1) 23%, rgba(252,252,252,1) 62%, rgba(240,240,240,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(209,228,240,1)), color-stop(23%, rgba(240,240,240,1)), color-stop(62%, rgba(252,252,252,1)), color-stop(100%, rgba(240,240,240,1)));
+  background: -webkit-linear-gradient(top, rgba(209,228,240,1) 0%, rgba(240,240,240,1) 23%, rgba(252,252,252,1) 62%, rgba(240,240,240,1) 100%);
+  background: -o-linear-gradient(top, rgba(209,228,240,1) 0%, rgba(240,240,240,1) 23%, rgba(252,252,252,1) 62%, rgba(240,240,240,1) 100%);
+  background: -ms-linear-gradient(top, rgba(209,228,240,1) 0%, rgba(240,240,240,1) 23%, rgba(252,252,252,1) 62%, rgba(240,240,240,1) 100%);
+  background: linear-gradient(to bottom, rgb(215, 230, 235) 0%, rgba(240,240,240,1) 23%, rgba(252,252,252,1) 62%, rgba(240,240,240,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1e4f0', endColorstr='#f0f0f0', GradientType=0 );
+}
+
+.kms-mat-card-desc {
+  box-shadow: -5px -2px 12px 0px rgba(0, 0, 0, 0.4), -1px 4px 1px 0px rgba(0, 0, 0, 0.4), 3px 3px 4px 1px rgba(0, 0, 0, 0.46) !important;
+}
+
+.mat-tab-body.mat-tab-body-active {
+  min-height: 300px;
+  padding: 60px;
+}
+
+.mat-tab-label-active {
+  color: #111282;
+  font-weight: bold;
+}
+
+.mat-sort-header-container {
+  justify-content: center;
+}
+
+mat-tab-group[vertical] .mat-tab-labels {
+  display: flex;
+  flex-direction: column!important;
+}
+
+mat-tab-group[vertical] {
+  display: flex;
+  flex-direction: row!important;
+}
+
+.row-spinner {
+  justify-content: center;
+  display: flex;
+  padding-top: 50px;
+}
+
+.row-spinner mat-spinner {
+  width: 70px !important;
+}
+
+.mat-select-search-input[_ngcontent-c8] {
+  text-align: justify;
+  direction: rtl;
+  font-family: IranSans;
+}
+
+.btn-primary {
+  background-image: linear-gradient(40deg,#45cafc,#303f9f) !important;
+  font-family: IranSans;
+}
+
+.mat-select-search-clear {
+  left: 4px !important;
+  right: auto !important;
+}
+
+.mat-option {
+  text-align: justify !important;
+  direction: rtl;
+  font-family: IranSans;
+}
+
+.mat-option-text {
+  padding-right: 10px;
+}
+
+.mat-option-text:hover {
+  background: #e5eaff;
+}
+
+.mat-select-search-input {
+  direction: rtl;
+  text-align: justify !important;
+  font-family: IranSans !important;
+}
+
+.mat-select-search-no-entries-found {
+  text-align: justify;
+  direction: rtl;
+  font-family: IranSans;
+}
+
+.swal2-cancel {
+  background-color: #ff294b !important;
+}
+
+.swal2-actions {
+  direction: rtl;
+  font-family: IranSans;
+}
+
+#swal2-title {
+  font-family: IranSans;
+}
+
+.swal2-icon.swal2-warning {
+  border-color: #faa8a8 !important;
+  color: #f88686 !important;
+}
+
+.swal2-title {
+  direction: rtl;
+  font-family: IranSans;
+}
+
+.mat-radio-label-content {
+  font-family: IranSans;
+  padding-right: 10px !important;
+}
+
+.ck-content {
+  direction: rtl;
+  text-align: justify;
+}
+
+.innerClass p, b, strong {
+  direction: rtl !important;
+}
+
+.mat-tab-body-content {
+  direction: rtl !important;
+}
+
+.mat-card-header-text {
+  overflow: hidden;
+}
+
+.mat-tooltip {
+  background: rgba(31, 53, 100, 0.7) !important;
+  font-family: IranSans !important;
+}
+
+.highcharts-credits {
+  display: none;
+}
+
+.highcharts-data-label tspan {
+  font-family: IranSans !important;
+  stroke-width: 2px !important;
+  font-weight: normal !important;
+  font-size: 15px !important;
+}
+
+#kms-last-men-item {
+  position: absolute;
+  left: 50px;
+  width: 300px;
+}
+
+.navbar-nav {
+  margin-right: 10px;
+  width: 100%;
+}
+
+.mat-checkbox-label {
+  font-family: IranSans;
+  padding-right: 10px;
+}
+
+@media screen and (min-width: 1500px) {
+  #kms-search-box {
+    min-width: 370px;
+  }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1500px) {
+  #kms-search-box {
+    min-width: 400px;
+    position: absolute;
+    top: 53px;
+    left: 33%;
+  }
+  .navbar {
+    padding-bottom: 50px;
+  }
+
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+  #kms-search-box {
+    min-width: 200px;
+    position: absolute;
+    top: 53px;
+    left: 43%;
+  }
+  .navbar {
+    padding-bottom: 50px;
+  }
+  #kms-last-men-item {
+    position: absolute;
+    left: 14px;
+    width: 300px;
+    top: 50px;
+  }
+}
+
+tspan {
+  font-family: IranSans;
+}
+
+@media screen and (max-width: 750px) {
+  #kms-last-men-item {
+    position: absolute;
+    left: -15px;
+    width: 300px;
+    top: 17px;
+  }
+
+  #kms-last-men-item .nav-link {
+    padding: 0 8px;
+  }
+
+  .navbar-nav {
+      margin-right: 10px;
+      width: 100%;
+      margin: 40px 0;
+      padding: 0;
+    text-align: center;
+    direction: rtl;
+  }
+
+  .dropdown-item {
+    text-align: center;
+    direction: rtl;
+  }
+
+  .responsive_table {
+    .responsive_table {
+      overflow-x: auto !important;
+      padding-bottom: 25px;
+    }
+
+    .mat-table {
+      min-width:800px;
+    }
+  }
+}
+

@@ -1,0 +1,56 @@
+<!--<div class="row">-->
+  <!--<div class="col-md-2"></div>-->
+  <!--<div class="col-md-8" style="min-height: 650px;">-->
+    <!--<h5 style="text-align: center; font-family: IranSans;direction: rtl;margin-top: 50px;">این قسمت از روز شنبه مورخ 1397/10/1 قابل بهره برداری خواهد بود.</h5>-->
+  <!--</div>-->
+  <!--<div class="col-md-2"></div>-->
+<!--</div>-->
+<div class="row" style="min-height: 650px;margin: 0;direction: rtl;">
+  <div class="col-md-2" style="margin-top: 45px;padding-bottom: 40px;">
+    <div class="kms-panel-box">
+      <h6>کاربر</h6>
+      <ul class="nav flex-column">
+        <li class="nav-item" *ngFor="let men of menu">
+          <a class="nav-link" (click)="onClickTab(men.ID)" [ngClass]="selectedTab === men.ID ? 'nav-link active' : 'nav-link'">{{ men.Title }}</a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="userRole">
+      <h5 *ngIf="userRole.Role[0] === 4 || userRole.Role[0] === 1" style="position: absolute;top: -25px;direction: rtl; text-align: justify">
+        <i class="fas fa-tachometer-alt" (click)="onClickMenu('dashboard')"></i>
+      </h5>
+    <div class="kms-panel-box" *ngIf="userRole.Role[0] === 4 || userRole.Role[0] === 1">
+      <h6>کاربران</h6>
+      <ul class="nav flex-column">
+        <li class="nav-item" *ngFor="let men of adminMenuUsers">
+          <a class="nav-link" (click)="onClickTab(men.ID)" [ngClass]="selectedTab === men.ID ? 'nav-link active' : 'nav-link'">{{ men.Title }}</a>
+        </li>
+      </ul>
+    </div>
+      <div class="kms-panel-box" class="kms-panel-box" *ngIf="userRole.Role[0] === 4 || userRole.Role[0] === 1">
+        <h6>وضعیت درس آموخته ها</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item" *ngFor="let men of adminMenuStatuses">
+            <a class="nav-link" (click)="onClickTab(men.ID)" [ngClass]="selectedTab === men.ID ? 'nav-link active' : 'nav-link'">{{ men.Title }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="kms-panel-box" *ngIf="userRole.Role[0] === 2 || userRole.Role[0] === 1">
+        <h6>وضعیت داوری</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item" *ngFor="let men of judgesMenu">
+            <a class="nav-link" (click)="onClickTab(men.ID)" [ngClass]="selectedTab === men.ID ? 'nav-link active' : 'nav-link'">{{ men.Title }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10" *ngIf="currentUser">
+    <div class="responsive_table">
+      <app-kms-my-lesson-learned *ngIf="selectedTab < 20 || selectedTab > 200" [currentUser]="currentUser" [selectedTabSubject]="selectedTabSubject" [selectedTab]="selectedTab" [userRole]="userRole"></app-kms-my-lesson-learned>
+      <app-kms-users *ngIf="selectedTab > 29 && selectedTab < 46"></app-kms-users>
+    </div>
+    <app-kms-user-form *ngIf="selectedTab === 20" [currentUser]="currentUser"></app-kms-user-form>
+  </div>
+  <!--<div class="col-md-2"></div>-->
+</div>

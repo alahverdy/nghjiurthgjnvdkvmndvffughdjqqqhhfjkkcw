@@ -1,0 +1,88 @@
+h2, h5 {
+  font-family: IranSans;
+  padding: 10px 25px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+a {
+  color: #7da7d5;
+}
+
+mat-card {
+  margin: 35px 85px;
+  font-family: IranSans;
+}
+
+mat-card table {
+  direction: rtl;
+  text-align: right;
+}
+
+.table-bordered th, .table-bordered td {
+  //border: none !important;
+}
+
+.mat-tab-group {
+  direction: rtl;
+  font-family: IranSans;
+}
+
+table {
+  border: 1px solid !important;
+}
+
+.table-bordered th, .table-bordered td {
+  width: 20%;
+}
+
+th {
+  background: #94b4c021;
+}
+
+a {
+  color: #007bff !important;
+  cursor: pointer;
+}
+
+.kms-post-edit {
+  float: left;
+  color: #169ada;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.kms-post-edit:hover {
+  color: #116791;
+}
+
+.fa-heart {
+  float: left;
+  cursor: pointer;
+  font-size: 20px;
+  color: #b24c4c;
+  margin-top: 18px;
+}
+
+.fas-heart {
+  float: left;
+  cursor: pointer;
+  font-size: 20px;
+  color: #b24c4c;
+  margin-top: 18px;
+}
+
+.kms-likes {
+  float: left;
+  font-size: 17px;
+  margin-top: 18px;
+  margin-right: 10px;
+}
+
+.kms-list-item {
+  font-family: IranSans;
+  direction: rtl;
+  text-align: justify;
+}

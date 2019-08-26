@@ -1,0 +1,77 @@
+<h2>لیست درس آموخته های من</h2>
+<hr>
+<div class="row row-spinner" style="padding: 15px 0;margin: 0;">
+  <mat-spinner diameter="60" *ngIf="!dataSource"></mat-spinner>
+</div>
+<div *ngIf="dataSource" style="padding-bottom: 10px;">
+  <mat-form-field style="direction: rtl;">
+    <input class="form-control" matInput (keyup)="applyFilter($event.target.value)" placeholder="جستجو در جدول کاربران...">
+  </mat-form-field>
+  <i class="fas fa-sync-alt" (click)="onRefresh()"></i>
+  <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> عنوان </th>
+      <td mat-cell *matCellDef="let element">
+        <a (click)="onClickUser(element.ID)">{{element.Title}}</a>
+      </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="JobTitle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> عنوان شغل </th>
+      <td mat-cell *matCellDef="let element"> {{element.JobTitle}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="JobLocation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> محل خدمت </th>
+      <td mat-cell *matCellDef="let element">
+      <span class="dots-kms" *ngIf="element.RaiPart.ID">{{ element.RaiPart.Title }}</span>
+      <span class="dots-kms" *ngIf="element.Contractor.ID">{{ element.Contractor.Title }}</span>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="EducationLevel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> تحصیلات </th>
+      <td mat-cell *matCellDef="let element">{{ element.EducationLevel.Title}}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Position">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> سمت </th>
+      <td mat-cell *matCellDef="let element"> {{element.Position.Title}} </td>
+    </ng-container>
+
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="BirthDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> تاریخ تولد </th>
+      <td mat-cell *matCellDef="let element"> {{element.BirthDate}} </td>
+    </ng-container>
+
+    <!--<ng-container matColumnDef="IsComplete">-->
+      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header> وضعیت اطلاعات </th>-->
+      <!--<td mat-cell *matCellDef="let element">-->
+      <!--<span class="dots-kms" *ngIf="element.IsComplete" style="color: #2c9b27">کامل</span>-->
+      <!--<span class="dots-kms" *ngIf="!element.IsComplete" style="color: #da345a">ناقص</span>-->
+      <!--</td>-->
+    <!--</ng-container>-->
+
+    <!--&lt;!&ndash; Weight Column &ndash;&gt;-->
+    <!--<ng-container matColumnDef="Edit">-->
+      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header> عملیات </th>-->
+      <!--<td mat-cell *matCellDef="let element">-->
+        <!--<a (click)="onClickItem('post/edit', element.ID)"><i class="far fa-edit"></i></a>-->
+        <!--<span style="cursor: default;padding: 0 10px;"></span>-->
+        <!--<a (click)="onPostDelete(element.ID)"><i class="far fa-trash-alt"></i></a>-->
+      <!--</td>-->
+    <!--</ng-container>-->
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

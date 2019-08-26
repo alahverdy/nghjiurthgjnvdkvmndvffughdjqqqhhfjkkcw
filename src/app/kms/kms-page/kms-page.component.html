@@ -1,0 +1,25 @@
+<div class="row kms-main" style="margin: 0;">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div *ngIf="pageId !== 'news' && pageData">
+      <h3>{{ pageData.Title }}</h3>
+      <hr>
+      <div class="innerClass" [innerHTML]="pageData.Body | safeHtml"></div>
+    </div>
+    <div *ngIf="pageId === 'news'">
+      <h3>اخبار</h3>
+      <hr>
+      <div class="row kms-news-post" style="overflow: hidden;height: 170px;" id="kms-news" *ngFor="let new of news">
+        <div class="col-md-12">
+          <a style="text-decoration: none;cursor: pointer;color: #007bff" (click)="onClickItem(new.ID)">
+            <h6>{{ new.Title }}</h6>
+          </a>
+          <hr>
+          <div class="innerClass" [innerHTML]="new.Body | safeHtml"></div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>

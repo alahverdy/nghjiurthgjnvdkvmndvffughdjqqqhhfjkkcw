@@ -1,0 +1,459 @@
+
+*:not(.fa) {
+  direction: rtl;
+  font-family: IranSans;
+}
+
+/deep/ a {
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.root {
+  background-color: rgb(248, 248, 248);
+  margin: 0;
+}
+
+h4 {
+  font-family: IranSans;
+  text-align: right;
+  direction: rtl;
+  padding: 10px;
+  color: #e3e3e3fa;
+}
+
+.right-side {
+  padding: 0 4px;
+  background-color: rgb(248, 248, 248);
+  box-shadow: -1px 0px 4px -2px rgba(44, 44, 44, 0.75);
+
+  .kms-main-header {
+    width: 100%;
+    background: linear-gradient(to top left, rgb(51, 75, 110), rgb(59, 108, 182));
+    padding: 15px 15px 10px 0px;
+    color: white;
+    font-size: 13px;
+  }
+}
+
+.left-side {
+  .kms-main-header {
+    background: linear-gradient(to top left, rgb(58, 49, 138), rgb(78, 69, 167));
+  }
+}
+
+.midle-side {
+  padding-right: 2px;
+
+  .kms-main-header {
+    padding: 15px 13px 8px 13px;
+    background-color: rgb(231, 231, 231);
+    border-right: 7px solid rgb(116, 180, 97);
+    color: black;
+  }
+
+  /deep/ .kms-main-content {
+    a {
+      color: green !important;
+      font-weight: bold;
+    }
+  }
+
+}
+
+
+/deep/ .kms-main-content {
+  padding: 10px;
+
+  * {
+    font-size: 14px !important;
+  }
+
+}
+
+.clcl {
+  color: red !important;
+}
+
+.kms-main-box {
+  border-radius: 2px;
+  padding-bottom: 7px;
+  margin: 10px 0 30px 0;
+  text-align: justify;
+  background-color: rgb(233, 233, 233);
+}
+
+.kms-news-post {
+  background-color: rgb(238, 238, 238) !important;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 170px;
+  margin: 20px;
+}
+
+.kms-news-post-header {
+  background-color: rgb(228, 228, 228);
+  height: 50px;
+  padding-right: 15px;
+  border-bottom: 1px solid rgb(206, 206, 206);
+}
+
+.innerClass {
+  margin: auto;
+  font-size: 13px;
+  line-height: 35px;
+}
+
+
+.fas {
+  color: #16587a !important;
+  text-decoration: none;
+}
+
+a {
+  color: #0066c0 !important;
+  text-decoration: none;
+}
+
+.nonP {
+  text-align: right;
+}
+
+
+.cards {
+  position: relative;
+  min-height: 220px;
+  margin-top: 10px;
+  padding: 30px 10px;
+
+  .mat-card {
+    height: 70px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .1s;
+    background-color: rgba(255, 255, 255, 0.281);
+    &:hover {
+      margin-top: -3px; 
+    }
+
+    .mat-card-title {
+      color: rgb(44, 44, 44);
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    .badge {
+      background-color: rgba(165, 165, 165, 0.075);
+      color: white;
+      font-size: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      padding-top: 8px;
+    }
+
+    .mat-fa {
+      font-size: 20px;
+      font-weight: bold;
+      position: absolute;
+      left: 4%;
+      top: 24px;
+    }
+
+    &:nth-child(1) {
+      .mat-fa 
+      {
+         color: rgb(235, 82, 82);
+      }
+    }
+
+    &:nth-child(2) {
+      .mat-fa 
+      {
+         color: rgb(82, 131, 204);
+      }
+    }
+
+    &:nth-child(3) {
+      .mat-fa 
+      {
+         color: rgb(30, 172, 30);
+      }
+    }
+
+    &:nth-child(4) {
+      .mat-fa 
+      {
+         color: rgb(40, 30, 131);
+      }
+    }
+  }
+
+}
+.intro
+{
+  margin-bottom: 50px; 
+  mat-card {
+    transition: .2s;
+    padding: 0 !important;
+    background-color: rgb(255, 255, 255);
+    box-shadow: none !important;
+    min-height: 43px;
+    border-radius: 80px 80px 10px 10px;
+    border: 1px dashed  rgba(185, 185, 185, 0.87); 
+    .title {
+      min-height: 64px;
+      padding: 0 30px;
+      border-radius: 1px 80px 10px 1px;
+      background: linear-gradient(to top left ,rgb(7, 112, 182),rgb(73, 161, 219) ) ;
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+    }
+    .content {
+      p {
+        margin: 0 !important;
+        padding: 10px 30px;
+        text-align: justify;
+        font-size: 13px;
+        color: rgb(122, 122, 122);
+      }
+    }
+    &:hover
+    {
+      .content {
+        p {
+          color:rgb(29, 29, 29);;
+        }
+      }
+    }
+  }
+}
+.card2 {
+  box-shadow: inset 11px -17px 2px -17px rgb(180, 180, 180);
+  min-height: 250px;
+
+  mat-card {
+    min-height: 200px;
+    padding: 0;
+    transition: .2s;
+    * {
+      transition: .2s;
+    }
+   
+    .header {
+      height: 60px;
+      border-bottom: 1px solid rgb(214, 214, 214);
+
+      .mat-fa {
+        font-size: 30px;
+        color: rgb(124, 124, 124);
+      }
+
+      .title {
+        font-weight: bold;
+        color: rgb(49, 49, 49);
+        font-size: 14px;
+      }
+    }
+
+    .content {
+      padding: 10px 18px;
+      p {
+        text-align: justify;
+        font-size: 13px;
+        color: rgb(124, 124, 124);
+      }
+    }
+
+    &:hover {
+      .header {
+        .mat-fa, .title {
+          color: rgb(31, 124, 161);
+        }
+      }
+
+      .content {
+        p {
+          color: rgb(66, 66, 66);
+        }
+      }
+    }
+  }
+}
+
+.start {
+  padding-right: 15px;
+  height: 80px;
+  background-color: rgb(240, 240, 240);
+
+  .text {
+    font-size: 15px;
+  }
+
+  button {
+    min-height: 45px;
+    font-size: 14px;
+    border: none;
+    width: 60%;
+    background: linear-gradient(to top left, rgb(30, 128, 173), rgb(126, 25, 167));
+    color: white;
+
+    &:hover {
+      background: linear-gradient(to top left, rgb(126, 25, 167), rgb(30, 128, 173));
+    }
+  }
+}
+
+.news {
+  padding-top: 0;
+  border-radius: 1px;
+  margin: 10px 0;
+  text-align: justify;
+  background-color: white;
+  min-height: auto;
+
+  .header {
+    position: relative;
+    color: rgb(43, 43, 43);
+    height: 60px;
+    padding: 0 15px;
+
+    .mat-fa {
+      position: absolute;
+      left: 2%;
+      top: 20px;
+      font-size: 18px;
+      color: rgb(24, 75, 143);
+    }
+
+    .title {
+      padding: 9px 20px;
+      border-radius: 6px;
+      border: 1px solid rgb(223, 223, 223);
+      color: rgb(46, 46, 46);
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 3px;
+    }
+  }
+
+  .content {
+    .post {
+      padding: 0;
+      overflow: hidden;
+      height: 170px;
+      margin-top: 15px;
+      background-color: rgb(248, 248, 248);
+      border-radius: 1px;
+
+      .header {
+        height: 50px;
+        background-color: #f5f5f5;
+        border-right: 3px solid rgb(32, 60, 104);
+        transition: .1s;
+
+        a {
+          color: rgb(61, 61, 61) !important;
+          font-size: 16px;
+          transition: .2s;
+
+          &:hover {
+            color: rgb(54, 148, 17) !important;
+          }
+        }
+      }
+
+      .innerClass {
+        padding: 15px;
+      }
+
+      &:hover {
+        .header {
+          border-right: 5px solid rgb(19, 39, 70);
+        }
+      }
+    }
+  }
+
+  .lastPostLearned {
+    padding: 0;
+    overflow: hidden;
+    margin-top: 15px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 1px;
+  }
+}
+
+/deep/ .panel {
+  margin-bottom: 40px;
+  padding-top: 0 !important;
+
+  .header {
+    padding-top: 0;
+    height: 60px;
+    text-align: center;
+    border-radius: 0px;
+
+    .title {
+      border-radius: 20px;
+      padding: 6px 15px 8px 15px;
+      display: inline-block;
+      border: 1px solid rgb(223, 223, 223);
+      font-size: 15px;
+    }
+  }
+
+  .content {
+    border: 1px solid rgb(226, 226, 226);
+    padding: 15px;
+
+    p {
+      text-align: right;
+    }
+
+    .buttons {
+      button {
+        font-size: 13px;
+        max-height: 45px;
+        max-width: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 570px) {
+
+  .cards {
+    margin-top: 50px;
+
+    .mat-card {
+      min-height: 60px;
+
+      .mat-card-title {
+        color: white;
+        font-size: 14px;
+      }
+
+      .mat-icon {
+        font-size: 25px;
+        top: -3px;
+      }
+    }
+  }
+
+
+}
+
+table {
+  width: 100%;
+  text-align: center !important;
+
+  th {
+    text-align: center !important;
+  }
+  td {
+    text-align: center !important;
+    cursor: pointer;
+  }
+}

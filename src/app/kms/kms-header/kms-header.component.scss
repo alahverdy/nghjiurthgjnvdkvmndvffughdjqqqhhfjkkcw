@@ -1,0 +1,94 @@
+nav {
+  direction: rtl;
+  font-family: IranSans;
+  background-color: #f1f1f1 !important;
+  color: black !important;
+  min-height: 80px;
+  box-shadow: 2px 3px 24px -7px rgba(23,23,23,1);
+  *{
+    font-size: 13px;
+  }
+}
+input
+{
+  width: 100%;
+  font-size: 13px !important;
+}
+img {
+  background: #f7f7f7;
+  height: 40px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.login
+{
+  font-size: 13px; 
+  padding: 7px 15px 10px 15px;
+  border-radius: 3px;
+  background-color: rgb(240, 56, 71); 
+  color: white !important;
+  cursor: pointer;
+  float: right;
+}
+.username
+{
+  position: relative;
+  float: right;
+  min-width: 60px;
+  margin-left: 5px; 
+  background-color: rgb(250, 250, 250);
+  .fa
+  {
+    margin-left: 10px; 
+    color: rgb(36, 36, 36);
+  }
+}
+
+.dropdown {
+  cursor: default;
+}
+
+.dropdown-item:hover {
+  background: #f54842c9;
+  color: white !important;
+}
+
+.dropdown-item {
+  padding: 13px 20px;
+  text-align: justify;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.dropdown-menu {
+  background-color: rgb(247, 247, 247);
+  border-radius: 2px;
+  margin-top: -1px; 
+}
+
+#searchUl {
+  position: absolute;
+  background: #f4f4f4;
+  width: 500px;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  margin-top: 1px;
+  margin-right: 3px;
+  list-style-type: none;
+  direction: rtl;
+  text-align: justify;
+  z-index: 99;
+  padding: 0;
+}
+
+#searchUl li {
+  border-bottom: 1px solid #4b4b4b24;
+  padding: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#searchUl li:hover {
+  background: #d4d4d4;;
+}

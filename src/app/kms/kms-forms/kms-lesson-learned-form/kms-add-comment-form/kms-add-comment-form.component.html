@@ -1,0 +1,61 @@
+    <div class="row">
+      <div class="col-md-12">
+        <h2>افزودن نظر جدید</h2>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <form [formGroup]="formGp" *ngIf="checking">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field>
+                  <input class="form-control" matInput formControlName="Title"
+                         placeholder="عنوان نظر" required>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Title').hasError('required')">
+                  * لطفا عنوان نظر را وارد نمایید <strong>(اجباری)</strong>
+                  </mat-error>
+                  <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Title').hasError('minlength')">
+                    * حداقل 5 کاراکتر وارد نمایید<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field>
+                                        <textarea
+                                          class="form-control"
+                                          matInput
+                                          matTextareaAutosize
+                                          matAutosizeMinRows="3"
+                                          matAutosizeMaxRows="10"
+                                          formControlName="Desc"
+                                          placeholder="متن نظر" required>
+            </textarea>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Desc').hasError('required')">
+                  * لطفا متن نظر را وارد نمایید <strong>(اجباری)</strong>
+                  </mat-error>
+                  <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Desc').hasError('minlength')">
+                    * حداقل 5 کاراکتر وارد نمایید<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <button class="btn btn-primary" [mat-dialog-close]="formGp" style="width: 100%">افزودن نظر</button>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2"></div>
+    </div>

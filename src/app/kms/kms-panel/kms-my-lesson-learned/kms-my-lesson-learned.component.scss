@@ -1,0 +1,95 @@
+table {
+  width: 100%;
+  font-family: IranSans;
+  text-align: center;
+  direction: rtl;
+}
+
+h2 {
+  font-family: IranSans;
+  text-align: center;
+  direction: rtl;
+  padding: 10px 25px;
+}
+
+.fa-edit {
+  color: #169ada;
+}
+
+.fa-edit:hover {
+  color: #1376a8;
+}
+
+.fa-trash-alt {
+  color: #da345a;
+}
+
+.fa-trash-alt:hover {
+  color: #a42a49;
+}
+
+.far {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.flex-column {
+  direction: rtl;
+  text-align: justify;
+  margin-top: 40px;
+}
+
+.flex-column li {
+  border: 1px solid #5a78b8;
+  font-family: IranSans;
+  cursor: pointer;
+}
+
+.flex-column li:hover {
+  background: #116791;
+}
+
+.flex-column li a:hover {
+  color: #fff;
+}
+
+a {
+  cursor: pointer;
+  color: #0066c0 !important;
+}
+
+.dots-kms {
+  display: inline-block;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.fa-sync-alt {
+  margin-left: 10px;
+  color: #1b77af;
+  cursor: pointer;
+}
+
+.fa-sync-alt:hover {
+  color: #125b86;
+}
+
+.fa-gavel {
+  color: #a42a49;
+  font-size: 20px;
+}
+
+.fa-gavel:hover {
+  color: #65182d;
+}
+
+.fa-clock {
+  color: #c52222;
+  padding-right: 5px;
+}
+
+.fa-clock span{
+  font-family: IranSans;
+}

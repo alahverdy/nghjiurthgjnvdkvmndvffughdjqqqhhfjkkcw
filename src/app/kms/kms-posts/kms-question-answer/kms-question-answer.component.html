@@ -1,0 +1,63 @@
+<div class="row" style="margin: 35px 0px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <mat-card class="main-mat-card-kms-qa">
+      <div class="kms-qa-box" id="kms-question-box" *ngIf="question">
+        <h4>
+          <span style="font-size: 21px;color: #75847b;cursor: default;">سوال : </span>
+          <span>{{ question.Title }}</span>
+          <i class="fas fa-file-signature" matTooltip="درس آموخته های مرتبط" (click)="onClickRelatedLL()"></i>
+        </h4>
+        <hr>
+        <div style="min-height: 200px;font-size: 17px;">
+          <p>{{ question.Body }}</p>
+        </div>
+        <div class="row" style="direction: rtl">
+          <div class="col-md-3">
+            <mat-card class="mat-card-kms-author">
+              <p style="margin-bottom: 0;">
+                <span><i class="fas fa-pen-nib"></i></span>
+                <span style="color: #224f76;font-weight: bold;">{{ question.User.Title }}</span>
+              </p>
+              <p style="margin-bottom: 0;margin-bottom: 0;font-size: 16px;color: #4a6fa6;">
+                <span><i class="far fa-clock"></i></span>
+                <span>{{ question.Created }}</span>
+              </p>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="direction: rtl;text-align: justify;font-family: IranSans;margin-top: 50px;">
+        <div class="col-md-6">
+          <span style="font-size: 20px;" *ngIf="answers">{{ answers.length }} پاسخ</span>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-primary" style="float: left;margin-top: -10px;" (click)="onAddAnswer()">افزودن پاسخ</button>
+        </div>
+      </div>
+      <hr style="border-top: 2px solid #2a3672;" *ngIf="answers.length !== 0">
+      <div *ngIf="answers">
+        <div class="kms-qa-box" *ngFor="let answer of answers">
+          <div style="min-height: 200px;font-size: 17px;">
+            <p>{{ answer.Body }}</p>
+          </div>
+          <div class="row" style="direction: rtl">
+            <div class="col-md-3">
+              <mat-card class="mat-card-kms-author">
+                <p style="margin-bottom: 0;">
+                  <span><i class="fas fa-pen-nib"></i></span>
+                  <span style="color: #224f76;font-weight: bold;">{{ answer.User.Title }}</span>
+                </p>
+                <p style="margin-bottom: 0;margin-bottom: 0;font-size: 16px;color: #4a6fa6;">
+                  <span><i class="far fa-clock"></i></span>
+                  <span>{{ answer.Created }}</span>
+                </p>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-md-1"></div>
+</div>

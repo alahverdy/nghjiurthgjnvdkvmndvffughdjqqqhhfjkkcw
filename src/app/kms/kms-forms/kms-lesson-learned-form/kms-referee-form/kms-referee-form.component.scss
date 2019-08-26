@@ -1,0 +1,47 @@
+h2 {
+  font-family: IranSans;
+  text-align: center;
+  direction: rtl;
+  padding: 10px 25px;
+}
+
+h4 {
+  font-family: IranSans;
+  text-align: justify;
+  direction: rtl;
+  padding-bottom:15px;
+}
+
+.form-group {
+  text-align: justify;
+  direction: rtl;
+}
+
+.row {
+  direction: rtl;
+}
+
+label {
+  font-family: IranSans;
+}
+
+.table {
+  font-family: IranSans;
+  text-align: justify;
+  direction: rtl;
+}
+
+mat-card {
+  position: absolute;
+  width: 800px;
+  height: 700px;
+  z-index: 99999;
+  left: 34%;
+  top: 5%;
+  font-family: IranSans;
+}
+
+.fa-times {
+  cursor: pointer;
+  color: #da345a;
+}

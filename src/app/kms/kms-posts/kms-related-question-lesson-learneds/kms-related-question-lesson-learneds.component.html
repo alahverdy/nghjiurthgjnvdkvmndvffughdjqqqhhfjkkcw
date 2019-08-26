@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>درس آموخته های مرتبط</h2>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <mat-list role="list" *ngIf="posts">
+      <mat-list-item *ngFor="let postt of posts;let i = index" role="listitem">
+        <p class="kms-list-item">{{ i + 1 + '. ' }}<a (click)="onPostClick(postt.QuestionAndAnswer.ID)">{{ postt.QuestionAndAnswer.Title }}</a></p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="col-md-1"></div>
+</div>

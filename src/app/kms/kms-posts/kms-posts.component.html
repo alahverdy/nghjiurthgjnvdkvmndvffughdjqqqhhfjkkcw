@@ -1,0 +1,169 @@
+<!--<div class="row">-->
+<!--<div class="col-md-2"></div>-->
+<!--<div class="col-md-8" style="min-height: 650px;">-->
+<!--<h5 style="text-align: center; font-family: IranSans;direction: rtl;margin-top: 50px;">این قسمت از روز شنبه مورخ 1397/10/1 قابل بهره برداری خواهد بود.</h5>-->
+<!--</div>-->
+<!--<div class="col-md-2"></div>-->
+<!--</div>-->
+<h2>لیست درس آموخته ها</h2>
+<hr>
+<div class="row" style="margin: 10px 25px;min-height: 650px;direction: rtl;" *ngIf="posts">
+  <div class="col-sm-12 col-md-12 col-lg-3">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description style="direction: rtl;font-family: IranSans;text-align: justify;margin-bottom: 15px;">
+            جستجو در عنوان درس آموخته
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <input [(ngModel)]="searchInLesson"
+               style="direction: rtl;font-family: IranSans;text-align: justify;margin-bottom: 15px;"
+               class="form-control" matInput
+               placeholder="جستجو در عنوان درس آموخته" (keyup)="onSearch($event)">
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description style="direction: rtl;font-family: IranSans;text-align: justify;margin-bottom: 15px;">
+            جستجو در نام نویسنده
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <input [(ngModel)]="searchInAuthor" style="direction: rtl;text-align: justify;margin-bottom: 15px;"
+               class="form-control" matInput
+               placeholder="جستجو در نام نویسنده" (keyup)="onAuthorSearch($event)">
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-card class="example-card">
+      <h5 style="direction: rtl;text-align: justify;">محور های درس آموخته</h5>
+      <hr>
+      <div class="row">
+        <section class="example-section">
+          <div class="col-md-12" *ngFor="let lessonLearnedTopic of lessonLearnedTopics; let i = index">
+            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, 'to')" class="example-margin">
+              {{ lessonLearnedTopic.Title }}
+            </mat-checkbox>
+          </div>
+        </section>
+      </div>
+    </mat-card>
+    <mat-card class="example-card">
+      <h5 style="direction: rtl;text-align: justify;">عملیات های درس آموخته</h5>
+      <hr>
+      <div class="row">
+        <section class="example-section">
+          <div class="col-md-12" *ngFor="let lessonLearnedOperation of lessonLearnedOperations; let i = index">
+            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, 'op')" class="example-margin">
+              {{ lessonLearnedOperation.Title }}
+            </mat-checkbox>
+          </div>
+        </section>
+      </div>
+    </mat-card>
+    <mat-card class="example-card">
+      <h5 style="direction: rtl;text-align: justify;">فیلتر زمانی</h5>
+      <hr>
+      <div class="row">
+        <section class="example-section">
+          <div class="col-md-12" *ngFor="let df of datesForFilter; let i = index">
+            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, df)" class="example-margin">
+              {{ df }}
+            </mat-checkbox>
+          </div>
+        </section>
+      </div>
+    </mat-card>
+    <mat-card class="example-card">
+      <h5 style="direction: rtl;text-align: justify;">امتیاز داوری</h5>
+      <hr>
+      <div class="row">
+        <section class="example-section">
+          <div class="col-md-12" *ngFor="let sf of scoresForFilter; let i = index">
+            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, sf)" class="example-margin">
+              از <strong>{{ sf }}</strong> تا <strong>{{sf + 1}}</strong>
+            </mat-checkbox>
+          </div>
+        </section>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-9">
+    <mat-card>
+      <mat-card-content fxLayout="row wrap"
+                        style="direction: rtl;text-align: right !important;font-family: IranSans !important; margin: 10px 0">
+        <div style="direction: rtl;text-align: right !important;font-family: IranSans; margin: 10px 0">
+          <span class="mat-fa fa fa-sort-amount-up"></span>
+          مرتب سازی بر اساس :
+        </div>
+        <div fxLayout="row wrap">
+          <button mat-button color="primary" (click)="sortData('topScore')">بالاترین‌امتیاز</button>
+          <button mat-button color="warn" (click)="sortData('bottomScore')">کم ترین‌امتیاز</button>
+          <button mat-button color="primary" (click)="sortData('topLike')">محبوب‌ترین</button>
+          <button mat-button color="primary" (click)="sortData('topDate')">جدید‌‌ترین</button>
+          <button mat-button color="warn" (click)="sortData('bottomDate')">قدیمی‌ترین</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <h5 style="text-align: center; direction: rtl;color: #da345a" *ngIf="checking && posts.length === 0">درس آموخته ای
+      پیدا نشد!</h5>
+    <div style="direction: rtl;font-family: IranSans; margin: 10px 0" *ngFor="let post of posts">
+      <mat-card class="example-card">
+        <mat-card-header style="text-align: right;border-bottom: 1px solid #d8e6ea;font-family: IranSans;">
+          <div mat-card-avatar [ngClass]="post.PostType === 'درس آموخته' ? 'card-avatar': 'card-avatar-special'">
+            <i class="fas fa-file-signature"></i>
+          </div>
+          <mat-card-title
+            style="cursor: pointer;color: #425961;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;"
+            (click)="onPostClick(post.ID)">{{ post.Title }}</mat-card-title>
+          <mat-card-subtitle>
+            <span>امتیاز : </span>
+            <span style="color: #425961;" *ngIf="post.MainScore">{{ post.MainScore }}</span>
+            <span style="color: #425961;" *ngIf="!post.MainScore">ندارد</span>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content style="min-height: 50px;padding-top: 15px;font-family: IranSans;padding-right: 26px;">
+          <div class="row">
+            <div class="col-md-6" style="text-align: right">
+              <span style="color: #14167f;">نویسنده اصلی : </span>
+              <span>{{ post.Author }}</span>
+            </div>
+            <div class="col-md-6" style="text-align: right">
+              <span style="color: #14167f;">تاریخ ایجاد : </span>
+              <span>{{ post.CreatedDate }}</span>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6" style="text-align: right">
+              <span style="color: #14167f;">محور درس آموخته : </span>
+              <span>{{ post.LessonLearnedTopic.Title }}</span>
+            </div>
+            <div class="col-md-6" style="text-align: right">
+              <span style="color: #14167f;">عملیات درس آموخته : </span>
+              <span>{{ post.OperationKind.Title }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-chip-list style="font-family: IranSans">
+                <mat-chip style="margin-right: 35px" color="primary" selected>{{ post.StatusId }}</mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<ngx-spinner
+  bdOpacity=0.9
+  bdColor="rgba(0,0,0,0.89)"
+  size="large"
+  color="#ffffff"
+  type="ball-spin-clockwise"
+  [fullScreen]="true"
+>
+  <p style="color: white"> ... لطفا صبر کنید </p>
+</ngx-spinner>
+<!--title="نام‌کاربری"-->

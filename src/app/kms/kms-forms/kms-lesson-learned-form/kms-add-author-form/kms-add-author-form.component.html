@@ -1,0 +1,48 @@
+    <div class="row">
+      <div class="col-md-12">
+        <h5>افزودن نویسنده جدید</h5>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <form [formGroup]="formGp" *ngIf="checking">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="Name"
+                         placeholder="نام نویسنده" required>
+                  <!--<mat-error style="text-align: right;" *ngIf="formGp.get('FullTitle_Contract').hasError('required')">-->
+                  <!--* لطفا عنوان کامل قرارداد را وارد نمایید <strong>(اجباری)</strong>-->
+                  <!--</mat-error>-->
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="LastName"
+                         placeholder="نام خانوادگی نویسنده" required>
+                  <!--<mat-error style="text-align: right;" *ngIf="formGp.get('FullTitle_Contract').hasError('required')">-->
+                  <!--* لطفا عنوان کامل قرارداد را وارد نمایید <strong>(اجباری)</strong>-->
+                  <!--</mat-error>-->
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <button class="btn btn-primary" [mat-dialog-close]="formGp" style="width: 100%">افزودن نویسنده</button>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2"></div>
+    </div>

@@ -1,0 +1,475 @@
+<!--<h2 style="text-align: center;">KMS HomePage</h2>-->
+<!--<hr>-->
+<div fxLayout="row" class="root" fxLayoutAlign="space-between">
+  <div fxFlex="20" class="right-side">
+    <div class="kms-main-box" *ngIf="DarsAmokhte">
+      <div class="kms-main-header">
+        <h6>{{ DarsAmokhte[0].Title }}</h6>
+      </div>
+      <div class="kms-main-content" id="kms-DarsAmokhte" *ngFor="let DarsAmokht of DarsAmokhte">
+        <!--        <div style="padding: 20px 13px 13px 0">-->
+        <!--          <span style="padding-left: 2px" class="mat-fa fa fa-user-graduate"></span>-->
+        <!--          <a (click)="onClickNormalPage('post/add')">افزودن درس آموخته</a>-->
+        <!--        </div>-->
+        <div class="innerClass nonP" [innerHTML]="DarsAmokht.Body | safeHtml"></div>
+      </div>
+    </div>
+    <!--    <div class="kms-main-box">-->
+    <!--      <div>-->
+    <!--        <img src="http://rpmo.rai.ir/PWA/kms/SiteAssets/img/poster.jpg" style="width: 100%;cursor: pointer;"-->
+    <!--             alt="سمینار تجربیات برتر" (click)="onClickPoster('http://rpmo.rai.ir/PWA/kms/SiteAssets/img/poster.jpg')">-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <div class="kms-main-box" fxLayout="column" fxLayoutAlign="space-around start">
+      <div class="kms-main-header">
+        <h6>تجربه برتر ماه</h6>
+      </div>
+      <div class="kms-main-content">
+        <span>
+          معرفی تجربه برتر ماه
+        </span>
+      </div>
+    </div>
+<!--    <div class="kms-main-box" *ngIf="moshahedeDarsAmokhteHayeGozashte" id="moshahedeDarsAmokhteHayeGozashte">-->
+<!--      <div class="kms-main-header">-->
+<!--        <h6>{{ moshahedeDarsAmokhteHayeGozashte[0].Title }}</h6>-->
+<!--      </div>-->
+<!--      <div class="kms-main-content" id="kms-moshahedeDarsAmokhteHayeGozashte"-->
+<!--           *ngFor="let moshahedeDarsAmokhteHayeGozasht of moshahedeDarsAmokhteHayeGozashte">-->
+<!--        <div class="innerClass" [innerHTML]="moshahedeDarsAmokhteHayeGozasht.Body | safeHtml"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="row kms-main-box" *ngIf="KetabcheDarsAmokhte" id="KetabcheDarsAmokhte">
+      <div class="kms-main-header">
+        <h6>{{ KetabcheDarsAmokhte[0].Title }}</h6>
+      </div>
+      <div class="kms-main-content" id="kms-KetabcheDarsAmokhte" *ngFor="let KetabcheDarsAmokht of KetabcheDarsAmokhte">
+        <div class="innerClass" [innerHTML]="KetabcheDarsAmokht.Body | safeHtml"></div>
+      </div>
+    </div>
+    <div class="kms-main-box" *ngIf="elanHa" id="elanHa">
+      <div class="kms-main-header">
+        <h6>{{ elanHa[0].Title }}</h6>
+      </div>
+      <div class="kms-main-content" *ngFor="let elanH of elanHa">
+        <div class="innerClass" [innerHTML]="elanH.Body | safeHtml"></div>
+      </div>
+    </div>
+    <div class="kms-main-box" *ngIf="mehvarhayeDarsAmokhte" id="mehvarhayeDarsAmokhte">
+      <div class="kms-main-header">
+        <h6>{{ mehvarhayeDarsAmokhte[0].Title }}</h6>
+      </div>
+      <div class="kms-main-content" *ngFor="let mehvarhayeDarsAmokht of mehvarhayeDarsAmokhte">
+        <div class="innerClass nonP" [innerHTML]="mehvarhayeDarsAmokht.Body | safeHtml"></div>
+      </div>
+    </div>
+    <div class="kms-main-box" *ngIf="bargozarkonandeha" id="bargozarkonandeha">
+      <div class="kms-main-header">
+        <h6>{{ box2[0].Title }}</h6>
+      </div>
+      <div class="kms-main-content" *ngFor="let box of box2">
+        <div class="innerClass" [innerHTML]="box.Body | safeHtml"></div>
+      </div>
+    </div>
+
+  </div>
+  <div fxFlex="80" fxLayout="column" class="midle-side">
+    <!-- <div class="row kms-main-box" *ngIf="box3" id="box3">
+      <div class="col-md-12 kms-main-header">
+        <h6>{{ box3[0].Title }}</h6>
+      </div>
+      <div class="col-md-12 kms-main-content" id="kms-box" *ngFor="let box of box3">
+        <div class="innerClass" [innerHTML]="box.Body | safeHtml"></div>
+      </div>
+    </div> -->
+
+    <div class="cards" fxLayout="row wrap" fxLayoutAlign="space-around start">
+      <mat-card fxFlex="42" fxLayoutAlign="space-around center"
+                fxLayoutAlign.xs="space-between center" routerLink="post/add" routerLinkActive="active">
+        <mat-card-title>افزودن درس آموخته</mat-card-title>
+        <!--        <small class="badge" fxLayoutAlign="center center">232</small>-->
+        <span class="mat-fa fa fa-pen"></span>
+      </mat-card>
+
+      <mat-card fxFlex="42" fxLayoutAlign="space-around center"
+                fxLayoutAlign.xs="space-between center" routerLink="posts"
+                routerLinkActive="active">
+        <mat-card-title>لیست درس آموخته ها</mat-card-title>
+        <!--        <small class="badge" fxLayoutAlign="center center">42</small>-->
+        <span class="mat-fa fa fa-pen"></span>
+      </mat-card>
+
+<!--      <mat-card fxFlex="21" fxLayoutAlign="space-around center"-->
+<!--                fxLayoutAlign.xs="space-between center" routerLink="QA" routerLinkActive="active">-->
+<!--        <mat-card-title>افزودن پرسش جدید</mat-card-title>-->
+<!--        &lt;!&ndash; <small class="badge" fxLayoutAlign="center center">5</small> &ndash;&gt;-->
+<!--        <span class="mat-fa fa fa-pen"></span>-->
+<!--      </mat-card>-->
+
+<!--      <mat-card fxFlex="21" fxLayoutAlign="space-around center"-->
+<!--                fxLayoutAlign.xs="space-between center" routerLink="questions" routerLinkActive="active">-->
+<!--        <mat-card-title>لیست پرسش و پاسخ ها</mat-card-title>-->
+<!--        &lt;!&ndash; <small class="badge" fxLayoutAlign="center center">232</small> &ndash;&gt;-->
+<!--        <span class="mat-fa fa fa-pen"></span>-->
+<!--      </mat-card>-->
+    </div>
+
+    <div fxLayout="row" class="intro" fxLayoutAlign="center center">
+      <mat-card fxLayout="row" fxFlex="80" fxLayoutAlign="center center">
+        <div class="title" fxLayoutAlign="center center">
+          معرفی
+        </div>
+        <div class="content" fxLayoutAlign="center center">
+          <p>
+            دفتر مديريت پروژه حوزه فني و زيربنايي
+            شرکت راه آهن ج.ا.ا در نظر دارد از طریق این سامانه، نسبت به مستند سازی دانش و تجربیات همکاران
+            در پروژه های حوزه زیربنایی، و انتخاب و قدردانی از تجربیات برتر اقدام کند
+          </p>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="card2" fxLayout="row" fxLayoutAlign="space-around start">
+
+      <mat-card fxFlex="30">
+          <div class="header" fxLayoutAlign="center center">
+            <span class="title">نحوه انتخاب</span>
+            <!-- <span class="mat-fa fa fa-hands-helping"></span> -->
+          </div>
+          <div class="content">
+            <p>
+              پس از انجام مراحل داوری (مطابق معیارهای آورده شده در شیوه نامه) و برگزيدن تجربیات برترهر ماه،
+                تجلیل از ارائه کنندگان این تجارب توسط معاون محترم فني و زيربنايي صورت خوهند پذيرفت.
+              در نهایت تجربیات برتر هر سال انتخاب خوهند شد
+            </p>
+          </div>
+      </mat-card>
+
+      <mat-card fxFlex="30">
+        <div class="header" fxLayoutAlign="center center">
+          <span class="title">تجربه</span>
+          <!-- <span class="mat-fa fa fa-hands-helping"></span> -->
+        </div>
+        <div class="content">
+          <p>
+            درس آموخته عبارت است از راهنماها،
+              نکات و يا چک ليست هايي در خصوص آنچه در مواجهه با يک موقعيت واقعی و البته خاص حاصل شده است.
+            تجربه ممکن است مثبت يا منفي باشد، لیکن برای کاربرد آتی در موارد مشابه احتمال کاربرد دارد
+          </p>
+        </div>
+      </mat-card>
+
+      <mat-card fxFlex="30">
+        <div class="header" fxLayoutAlign="center center">
+          <span class="title">تفاوت تجربه و ایده</span>
+          <!-- <span class="mat-fa fa fa-hands-helping"></span> -->
+        </div>
+        <div class="content">
+          <p>
+            میان "تجربه" بعنوان ابتکارعمل یا شرایط خاصی که در در محیط واقعی پروژه رخ داده است
+            و "ایده" که در حال حاضر فرصت آزمون واقعی توسط ارائه دهنده نیافته تفاوت است
+            در این سامانه صرفاً تجربیات مد نظر بوده و داوری می شوند
+          </p>
+        </div>
+      </mat-card>
+
+    </div>
+
+    <br><br><br>
+
+    <div class="start" fxLayout="row">
+<!--      <div fxFlex="60" fxLayoutAlign="start center">-->
+<!--        <span class="text">یک متن کوتاه در این جا قرار می گیرد یک متن کوتاه در این جا قرار می گیرد</span>-->
+<!--      </div>-->
+      <div fxFlex="60" fxLayout="row" class="intro" fxLayoutAlign="center center"  style="margin-bottom: 0 !important;">
+        <mat-card fxLayout="row" fxFlex="80" fxLayoutAlign="center center">
+<!--          <div class="title" fxLayoutAlign="center center">-->
+<!--            تجربه-->
+<!--          </div>-->
+          <div class="content" fxLayoutAlign="center center">
+            <p style="font-size: inherit">تجربه ، جوهر یادگیری سازمانی است.
+            </p>
+          </div>
+        </mat-card>
+      </div>
+
+      <div fxFlex="40" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" (click)="onClickNormalPage('post/add')">همین الان درس آموخته جدید اضافه کن</button>
+      </div>
+<!--      <div fxFlex="40" fxLayoutAlign="center center">-->
+<!--        <button (click)="onClickNormalPage('post/add')">همین الان درس آموخته جدید اضافه کن</button>-->
+<!--      </div>-->
+    </div>
+
+    <br><br>
+
+    <div fxLayoutAlign="center start">
+      <mat-card fxFlex="96" class="news" *ngIf="news" id="news">
+        <div class="header" fxLayoutAlign="start center">
+          <span class="mat-fa fa fa-network-wired"></span>
+          <span class="title">اخبار</span>
+        </div>
+        <div class="content">
+          <mat-card class="post" id="kms-news" *ngFor="let new of news">
+            <div class="header" fxLayoutAlign="start center">
+              <a (click)="onClickItem(new.ID)">
+                {{ new.Title }}
+              </a>
+            </div>
+            <div class="innerClass" [innerHTML]="new.Body | safeHtml"></div>
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+    <div fxLayoutAlign="center start">
+      <mat-card fxFlex="96" class="news" *ngIf="seminarReport" id="seminar">
+        <div class="header" fxLayoutAlign="start center">
+          <span class="mat-fa fa fa-chalkboard-teacher"></span>
+          <span class="title">گزارش سمینار های گذشته</span>
+        </div>
+        <div class="content">
+          <mat-card class="post" id="seminar-news" *ngFor="let sr of seminarReport">
+            <div class="header" fxLayoutAlign="start center">
+              <a (click)="onClickItem(sr.ID)">
+                {{ sr.Title }}
+              </a>
+            </div>
+            <div class="innerClass" [innerHTML]="sr.Body | safeHtml"></div>
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+    <br><br>
+    <!-- <div class="row kms-main-box" *ngIf="seminarsIntroduction" id="seminarsIntroduction" style="border: 1px solid red">
+      <div class="col-md-12 kms-main-header">
+        <h6>{{ seminarsIntroduction[0].Title }}</h6>
+      </div>
+      <div class="col-md-12 kms-main-content">
+        <div class="row" id="kms-seminarIntroduce" *ngFor="let seminar of seminarsIntroduction">
+          <div class="col-md-12">
+            <div class="innerClass" [innerHTML]="seminar.Body | safeHtml"></div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  <div class="row kms-main-box" *ngIf="box4" id="box4" style="border: 1px solid red">
+    <div class="col-md-12 kms-main-header">
+      <h6>{{ box4[0].Title }}</h6>
+    </div>
+    <div class="col-md-12 kms-main-content" *ngFor="let box of box4">
+      <div class="innerClass" [innerHTML]="box.Body | safeHtml"></div>
+    </div>
+  </div>
+    <div class="row" style="margin: 0;" *ngIf="nahveEraeTajrobeat && jamAvariDarsAmokhte" style="border: 1px solid red">
+      <div class="col-md-5 kms-main-box" id="kms-nahveEraeTajrobeat">
+        <div class="row">
+          <div class="col-md-12 kms-main-header">
+            <h6>{{ nahveEraeTajrobeat[0].Title }}</h6>
+          </div>
+          <div class="col-md-12 kms-main-content" *ngFor="let nahveEraeTajrobe of nahveEraeTajrobeat">
+            <div class="innerClass" [innerHTML]="nahveEraeTajrobe.Body | safeHtml"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5 kms-main-box" id="kms-jamAvariDarsAmokhte">
+        <div class="row">
+          <div class="col-md-12 kms-main-header">
+            <h6>{{ jamAvariDarsAmokhte[0].Title }}</h6>
+          </div>
+          <div class="col-md-12 kms-main-content" *ngFor="let jamAvariDarsAmokht of jamAvariDarsAmokhte">
+            <div class="innerClass" [innerHTML]="jamAvariDarsAmokht.Body | safeHtml"></div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  <div class="row kms-main-box" *ngIf="box5" id="box5">
+    <div class="col-md-12 kms-main-header">
+      <h6>{{ box5[0].Title }}</h6>
+    </div>
+    <div class="col-md-12 kms-main-content" *ngFor="let box of box5">
+      <div class="innerClass" [innerHTML]="box.Body | safeHtml"></div>
+    </div>
+  </div> -->
+    <!--  <div fxLayoutAlign="center start">-->
+    <!--    <mat-card class="panel" fxFlex="96" *ngIf="mehvarhayeDarsAmokhte">-->
+    <!--      <mat-card-content>-->
+    <!--        <div id="mehvarhayeDarsAmokhte">-->
+    <!--          <div class="header" fxLayoutAlign="start center">-->
+    <!--            <span class="title">{{ mehvarhayeDarsAmokhte[0].Title }}</span>-->
+    <!--          </div>-->
+    <!--          <div class="content" id="kms-mehvarhayeDarsAmokhte"-->
+    <!--                *ngFor="let mehvarhayeDarsAmokht of mehvarhayeDarsAmokhte">-->
+    <!--            <div class="innerClass nonP" [innerHTML]="mehvarhayeDarsAmokht.Body | safeHtml"></div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </mat-card-content>-->
+    <!--    </mat-card>-->
+    <!--  </div>-->
+
+    <div fxLayoutAlign="center start">
+      <mat-card class="panel" fxFlex="96" *ngIf="bargozarkonandeha">
+        <mat-card-content>
+          <div id="bargozarkonandeha">
+            <div class="header" fxLayoutAlign="start center" *ngIf="bargozarkonandeha">
+              <span class="title">{{ bargozarkonandeha[0].Title }}</span>
+            </div>
+            <div class="content" *ngFor="let bargozarkonandeh of bargozarkonandeha">
+              <div class="innerClass" [innerHTML]="bargozarkonandeh.Body | safeHtml"></div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+    <!--  <div fxLayoutAlign="center start">
+       <mat-card class="panel" fxFlex="96">
+         <mat-card-content>
+           <div id="box1">
+             <div class="header" *ngIf="bargozarkonandeha">
+               <span class="title">{{ box1[0].Title }}</span>
+             </div>
+             <div class="content" *ngFor="let box of box1">
+               <div class="innerClass" [innerHTML]="box.Body | safeHtml"></div>
+             </div>
+           </div>
+         </mat-card-content>
+       </mat-card>
+     </div> -->
+
+
+    <!--    <div fxLayoutAlign="center start">-->
+    <!--      <mat-card class="panel" fxFlex="96">-->
+    <!--        <mat-card-content>-->
+    <!--          <div id="box2">-->
+    <!--            <div class="header" fxLayoutAlign="start center" *ngIf="bargozarkonandeha">-->
+    <!--              <span class="title">{{ box2[0].Title }}</span>-->
+    <!--            </div>-->
+    <!--            <div class="content" *ngFor="let box of box2">-->
+    <!--              <div class="innerClass" [innerHTML]="box.Body | safeHtml"></div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </mat-card-content>-->
+    <!--      </mat-card>-->
+    <!--    </div>-->
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around start">
+      <mat-card style="min-height: 300px;" fxFlex="32" class="news">
+        <div class="header" fxLayoutAlign="start center">
+          <span class="mat-fa fa fa-network-wired"></span>
+          <span class="title">آخرین درس آموخته ها</span>
+        </div>
+        <div>
+          <mat-card class="lastPostLearned">
+            <div fxLayoutAlign="start center">
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="Title">
+                  <th mat-header-cell *matHeaderCellDef> عنوان درس آموخته</th>
+                  <td mat-cell *matCellDef="let element" (click)="onPostClick(element.Title , 'last')"> {{element.Title}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="Created">
+                  <th mat-header-cell *matHeaderCellDef> تاریخ ایجاد</th>
+                  <td mat-cell *matCellDef="let element"> {{element.Created}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+          </mat-card>
+        </div>
+      </mat-card>
+
+      <mat-card style="min-height: 300px;" fxFlex="32" class="news">
+        <div class="header" fxLayoutAlign="start center">
+          <span class="mat-fa fa fa-network-wired" style="color: rgb(243, 54, 54);"></span>
+          <span class="title">برترین درس آموخته ها</span>
+        </div>
+        <div>
+          <mat-card class="lastPostLearned">
+            <div fxLayoutAlign="start center">
+              <table mat-table [dataSource]="dataSourceForBestScores" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="Title">
+                  <th mat-header-cell *matHeaderCellDef> عنوان درس آموخته</th>
+                  <td mat-cell *matCellDef="let element" (click)="onPostClick(element.Score, 'score')"> {{element.Title}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="Created">
+                  <th mat-header-cell *matHeaderCellDef>امتیاز داوری</th>
+                  <td mat-cell *matCellDef="let element"> {{element.Score}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+          </mat-card>
+        </div>
+      </mat-card>
+
+      <mat-card style="min-height: 300px;" fxFlex="32" class="news">
+        <div class="header" fxLayoutAlign="start center">
+          <span class="mat-fa fa fa-network-wired" style="color: rgb(37, 160, 58);"></span>
+          <span class="title">محبوب ترین درس آموخته ها</span>
+        </div>
+        <div>
+          <mat-card class="lastPostLearned">
+            <div fxLayoutAlign="start center">
+              <table mat-table [dataSource]="dataSourceForLikes" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="Title">
+                  <th mat-header-cell *matHeaderCellDef> عنوان درس آموخته</th>
+                  <td mat-cell *matCellDef="let element" (click)="onPostClick(element.Like , 'like')"> {{element.Title}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="Like">
+                  <th mat-header-cell *matHeaderCellDef>تعداد پسندیدن</th>
+                  <td mat-cell *matCellDef="let element"> {{element.Like}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+              </table>
+            </div>
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+
+  </div>
+  <!-- <div fxFlex="19" class="left-side">
+    
+    
+
+  </div> -->
+</div>
+<ngx-spinner
+  bdOpacity=0.9
+  bdColor="rgba(0,0,0,0.89)"
+  size="large"
+  color="#ffffff"
+  type="ball-spin-clockwise"
+  [fullScreen]="true"
+>
+  <p style="color: white"> ... لطفا صبر کنید </p>
+</ngx-spinner>

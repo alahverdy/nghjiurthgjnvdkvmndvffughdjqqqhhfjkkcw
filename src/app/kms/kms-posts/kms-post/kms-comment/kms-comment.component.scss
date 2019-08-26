@@ -1,0 +1,45 @@
+h2 {
+  font-family: IranSans;
+  text-align: center;
+  direction: rtl;
+  padding: 10px 25px;
+}
+
+a {
+  color: #7da7d5;
+}
+
+mat-card {
+  margin: 35px 85px;
+  font-family: IranSans;
+}
+
+mat-card table {
+  direction: rtl;
+  text-align: right;
+}
+
+.table-bordered th, .table-bordered td {
+  border: none !important;
+}
+
+.mat-tab-group {
+  direction: rtl;
+  font-family: IranSans;
+}
+
+.btn-primary {
+  float: left;
+  margin-left: 35px;
+}
+
+.fa-comment-dots {
+  color: #2272b6;
+  padding-left: 7px;
+}
+
+.fa-user {
+  font-size: 16px;
+  padding-left: 3px;
+  color: #924f4f;
+}

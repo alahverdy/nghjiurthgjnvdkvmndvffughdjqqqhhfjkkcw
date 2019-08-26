@@ -1,0 +1,138 @@
+<h2>لیست درس آموخته های من</h2>
+<hr>
+<div class="row row-spinner" style="padding: 15px 0;margin: 0;">
+  <mat-spinner diameter="60" *ngIf="!dataSource"></mat-spinner>
+</div>
+<div *ngIf="dataSource">
+  <a *ngIf="selectedTab === 210 || selectedTab === 220" style="text-align: justify;direction: rtl;font-family: IranSans" (click)="onClickItem('page', 19)">مشاهده دستور العمل داوری</a>
+  <mat-form-field style="direction: rtl;">
+    <input class="form-control" matInput (keyup)="applyFilter($event.target.value)"
+           placeholder="جستجو در جدول درس آموخته های من...">
+  </mat-form-field>
+  <i class="fas fa-sync-alt" (click)="onRefresh()"></i>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> عنوان</th>
+      <td mat-cell *matCellDef="let element">
+        <a (click)="onClickItem('post', element.ID)">{{element.Title}}</a>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="OperationKind">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> عملیات درس آموخته</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.OperationKind}}
+      </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Author" *ngIf="selectedTab === 10">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> نویسنده اصلی</th>
+      <td mat-cell *matCellDef="let element"> {{element.Author}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Author" *ngIf="selectedTab !== 10">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ایجاد کننده</th>
+      <td mat-cell *matCellDef="let element">
+        <a (click)="onClickUser(element.Creator.ID)">{{element.Creator.Title}}</a>
+      </td>
+    </ng-container>
+
+    <!--&lt;!&ndash; Name Column &ndash;&gt;-->
+    <!--<ng-container matColumnDef="Contract">-->
+    <!--<th mat-header-cell *matHeaderCellDef mat-sort-header> قرارداد </th>-->
+    <!--<td mat-cell *matCellDef="let element"> {{element.Contract}} </td>-->
+    <!--</ng-container>-->
+
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="KMSContract">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> قرارداد</th>
+      <td mat-cell *matCellDef="let element">
+        <a class="dots-kms" (click)="onClickContract(element.KMSContract.ID, element.KMSContract.Title)"
+           *ngIf="element.KMSContract.ID">{{ element.KMSContract.Title }}</a>
+        <a class="dots-kms" (click)="onClickContract(element.Contract.ID, element.Contract.Title)"
+           *ngIf="element.Contract.ID">{{ element.Contract.Title }}</a>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="MainScore">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> امتیاز داوری</th>
+      <td mat-cell *matCellDef="let element">
+        <!--<span *ngIf="!element.MainScore"></span>-->
+        <span *ngIf="element.MainScore">{{element.MainScore}}</span>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Judges">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> داوران</th>
+      <td mat-cell *matCellDef="let element" style="min-width: 200px;">
+        <!--<span *ngIf="!element.MainScore"></span>-->
+        <div *ngIf="userNames" style="color: #8b1f1f">
+          <span *ngIf="element.Judges">
+          <span *ngFor="let judge of element.Judges; let i = index">
+            {{ judge.Title }}
+            <span *ngIf="judge.Score"> : {{ judge.Score }}<br></span>
+            <!--<span *ngIf="(i + 1) < element.Judges.length"> , </span>-->
+          </span>
+        </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="StatusId" *ngIf="selectedTab === 10">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> وضعیت</th>
+      <td mat-cell *matCellDef="let element"> {{element.StatusId}}</td>
+    </ng-container>
+
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="CreatedDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> تاریخ ایجاد</th>
+      <div></div>
+      <td mat-cell *matCellDef="let element">
+        <span>{{element.CreatedDate}}</span>
+        <i class="far fa-clock" *ngIf="+element.CreatedDateByTime < 48" [matTooltip]="'مهلت ویرایش : ' + roundDown(48 - +element.CreatedDateByTime) + ' ساعت'"></i>
+      </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Edit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> عملیات</th>
+      <td mat-cell *matCellDef="let element" style="width: 59px;">
+        <div *ngIf="selectedTab === 10">
+          <a (click)="onClickItem('post/edit', element.ID)" *ngIf="+element.CreatedDateByTime < 48">
+            <i class="far fa-edit"></i>
+          </a>
+          <span style="cursor: default;padding: 0 10px;"></span>
+          <a (click)="onPostDelete(element.ID)" *ngIf="+element.CreatedDateByTime < 48">
+            <i class="far fa-trash-alt"></i>
+          </a>
+        </div>
+        <div *ngIf="selectedTab !== 10">
+          <a (click)="onClickApproval(true, element.ID)">
+            <i style="color: #2c9b27" class="far fa-check-circle"></i>
+          </a>
+          <span style="cursor: default;padding: 0 10px;"></span>
+          <a (click)="onClickApproval(false, element.ID)">
+            <i style="color: #ff294b" class="fas fa-exclamation-triangle"></i>
+          </a>
+          <span style="cursor: default;padding: 0 10px;"></span>
+          <a (click)="onClickReferee(element.ID)" *ngIf="element.StatusId === 'تایید شده'">
+            <i class="fas fa-gavel" style="color: #6610f2;"></i>
+          </a>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

@@ -1,0 +1,16 @@
+<div class="row" style="margin: 40px;padding-bottom: 150px;border-bottom: 1px solid #f0f0f0;">
+  <div class="col-md-12" style="padding-bottom: 20px;">
+    <h4>
+      <i class="far fa-comment-dots"></i><span>{{ comment.Title }}</span>
+    </h4>
+    <h6 style="padding-right: 5px;">
+      <i class="far fa-user"></i><span>توسط </span>
+      <span>{{ comment.User.Title }}</span>
+      <span> در تاریخ </span>
+      <span>{{ comment.Created }}</span>
+    </h6>
+  </div>
+  <div class="col-md-12" style="border-top: 1px solid #e2e3e3;padding-top: 20px;">
+    <p>{{ comment.Text }}</p>
+  </div>
+</div>

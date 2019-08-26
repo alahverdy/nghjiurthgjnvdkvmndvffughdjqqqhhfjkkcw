@@ -1,0 +1,92 @@
+table {
+  width: 100%;
+  font-family: IranSans;
+  text-align: center;
+  direction: rtl;
+}
+
+h2 {
+  font-family: IranSans;
+  text-align: center;
+  direction: rtl;
+  padding: 10px 25px;
+}
+
+.fa-edit {
+  color: #169ada;
+}
+
+.fa-edit:hover {
+  color: #1376a8;
+}
+
+.fa-trash-alt {
+  color: #da345a;
+}
+
+.fa-trash-alt:hover {
+  color: #a42a49;
+}
+
+.far {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.flex-column {
+  direction: rtl;
+  text-align: justify;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.flex-column li {
+  border: 1px solid #5a78b8;
+  font-family: IranSans;
+  cursor: pointer;
+  width: 100%;
+}
+
+.flex-column li:hover {
+  background: #116791;
+}
+
+.flex-column li a:hover {
+  color: #fff;
+}
+
+.active {
+  color: #425961 !important;
+  font-weight: bold;
+  background: #425b612e;
+}
+
+.active:hover {
+  color: #fff !important;
+  font-weight: normal !important;
+}
+
+h6 {
+  direction: rtl;
+  text-align: center;
+  padding: 10px 14px;
+  background: #425961;
+  color: #fff;
+}
+
+.kms-panel-box {
+  margin-top: 30px;
+}
+
+.fa-tachometer-alt {
+  font-size: 30px;
+  color: #35798c;
+  text-align: center;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.fa-tachometer-alt:hover {
+  color: #245360;
+}

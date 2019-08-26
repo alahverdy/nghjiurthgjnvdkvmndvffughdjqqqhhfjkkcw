@@ -1,0 +1,56 @@
+<!--<div class="row">-->
+  <!--<div class="col-md-2"></div>-->
+  <!--<div class="col-md-8" style="min-height: 650px;">-->
+    <!--<h5 style="text-align: center; font-family: IranSans;direction: rtl;margin-top: 50px;">این قسمت از روز شنبه مورخ 1397/10/1 قابل بهره برداری خواهد بود.</h5>-->
+  <!--</div>-->
+  <!--<div class="col-md-2"></div>-->
+<!--</div>-->
+<h2>لیست پرسش ها</h2>
+<hr>
+<div class="row" *ngIf="checking && questions.length === 0" style="margin: 0;">
+  <div class="col-md-12">
+    <h5 style="text-align: center; direction: rtl;color: #da345a">در حال حاضر پرسشی ثبت نشده است!</h5>
+  </div>
+</div>
+<div class="row" style="margin: 10px 25px;min-height: 650px;direction: rtl;" *ngIf="questions">
+  <div class="col-xs-12 col-sm-12 col-lg-3" style="direction: rtl;font-family: IranSans; margin: 5px 0" *ngFor="let question of questions">
+    <mat-card class="example-card">
+      <mat-card-header style="text-align: right;border-bottom: 1px solid #d8e6ea;font-family: IranSans;">
+        <div mat-card-avatar [ngClass]="question.Type === 2 ? 'card-avatar': 'card-avatar-special'">
+          <i class="fas fa-question"></i>
+        </div>
+        <mat-card-title style="cursor: pointer;color: #425961;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;" (click)="onPostClick(question.ID)">{{ question.Title }}</mat-card-title>
+        <!--<mat-card-subtitle>-->
+          <!--<span>امتیاز : </span>-->
+          <!--<span style="color: #425961;" *ngIf="post.MainScore">{{ post.MainScore }}</span>-->
+          <!--<span style="color: #425961;" *ngIf="!post.MainScore">ندارد</span>-->
+        <!--</mat-card-subtitle>-->
+      </mat-card-header>
+      <!--<div mat-card-image *ngIf="type === 'duties'">-->
+        <!--<img class="img1" [src]="contract.Picture" alt="Photo of a Shiba Inu">-->
+        <!--<img class="img2" [src]="contract.Picture" alt="Photo of a Shiba Inu">-->
+      <!--</div>-->
+      <mat-card-content style="min-height: 50px;padding-top: 15px;font-family: IranSans;">
+        <div class="row">
+          <div class="col-md-6" style="text-align: center">
+            <span style="color: #14167f;">نویسنده : </span>
+            <span>{{ question.User.Title }}</span>
+          </div>
+          <div class="col-md-6" style="text-align: center">
+            <span style="color: #14167f;">تاریخ ایجاد : </span>
+            <span>{{ question.Created }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+      <!--<mat-card-actions>-->
+        <!--<div class="row">-->
+          <!--<div class="col-md-12">-->
+            <!--<mat-chip-list style="font-family: IranSans">-->
+              <!--<mat-chip style="margin-right: 35px;" color="primary" selected>{{ question.StatusId }}</mat-chip>-->
+            <!--</mat-chip-list>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</mat-card-actions>-->
+    </mat-card>
+  </div>
+</div>

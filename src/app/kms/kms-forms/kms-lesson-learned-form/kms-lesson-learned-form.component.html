@@ -1,0 +1,321 @@
+<div>
+  <p *ngIf="!postEdit" class="title"><span>افزودن درس آموخته</span></p>
+  <p *ngIf="postEdit" class="title"><span>ویرایش درس آموخته</span></p>
+  <div class="row row-spinner" style="margin: 0;padding: 15px 0;">
+    <mat-spinner diameter="60" *ngIf="!checking"></mat-spinner>
+  </div>
+  <div style="min-height: 650px;margin: 0;" fxLayoutAlign="center center" *ngIf="checking">
+    <div fxFlex="90">
+      <mat-card class="example-card" style="padding: 15px;">
+        <mat-card-content style="direction: rtl;padding:10px;font-family: IranSans;">
+          <form [formGroup]="formGp">
+            <section>
+              <div class="kms-row">
+                <div fxFlex="100">
+                  <mat-form-field>
+                    <input matInput formControlName="Title"
+                           placeholder="عنوان درس آموخته" required>
+                    <!--<mat-error style="text-align: right;" *ngIf="formGp.get('FullTitle_Contract').hasError('required')">-->
+                    <!--* لطفا عنوان کامل قرارداد را وارد نمایید <strong>(اجباری)</strong>-->
+                    <!--</mat-error>-->
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="kms-row" fxLayout="row" fxLayoutAlign="space-between start">
+                <div fxFlex="33">
+                  <mat-form-field>
+                    <mat-select formControlName="lessonLearnedTopic" placeholder="محور درس آموخته"
+                                required>
+                      <mat-option *ngFor="let lessonLearnedTopic of lessonLearnedTopics"
+                                  [value]="lessonLearnedTopic.ID">
+                        {{ lessonLearnedTopic.Title }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="33">
+                  <mat-form-field>
+                    <mat-select formControlName="lessonLearnedStep" placeholder="مرحله درس آموخته"
+                                required>
+                      <mat-option *ngFor="let lessonLearnedStep of lessonLearnedSteps" [value]="lessonLearnedStep.ID">
+                        {{ lessonLearnedStep.Title }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="33">
+                  <mat-form-field>
+                    <mat-select formControlName="OperationKind" placeholder="نوع عملیات" required>
+                      <mat-option *ngFor="let OperationKind of operationKinds" [value]="OperationKind.ID">
+                        {{ OperationKind.Title }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="kms-row" fxLayout="row" fxLayoutAlign="space-between start">
+                <div fxFlex="49.5" fxLayout="column">
+                  <mat-form-field *ngIf="users">
+                    <mat-select [formControl]="bankMultiCtrl" placeholder="انتخاب نویسندگان..."
+                                (selectionChange)="onSelectionChange()" [multiple]="true" #multiSelect required>
+                      <ngx-mat-select-search [placeholderLabel]="'نام نویسنده مورد نظر خود را جستجو کنید...'"
+                                             [noEntriesFoundLabel]="'نویسنده ای پیدا نشد...'"
+                                             [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
+                      <mat-option *ngFor="let user of filteredBanksMulti | async" [value]="user">
+                        {{ user.Title }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-hint *ngIf="!isReadOnly" fxLayoutAlign="start">
+                    <strong>
+                      در صورت نبودن نویسنده در لیست بر روی
+                      <i style="cursor: pointer" (click)="onAddAuthor()" class="fas fa-plus"></i>
+                      کلیک نمایید
+                    </strong>
+                  </mat-hint>
+                </div>
+                <div fxFlex="49.5">
+                  <mat-form-field>
+                    <mat-select formControlName="mainAuthor" placeholder="نویسنده اصلی" required>
+                      <mat-option *ngFor="let author of formGp.get('Author').value" [value]="author">
+                        {{ author.Title }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </section>
+
+            <br>
+
+            <section>
+              <div>
+                <!--<mat-tab-group>-->
+                <!--<mat-tab label="قرارداد های موجود">-->
+                <h5>انتخاب قرارداد / پروژه</h5>
+                <div>
+                  <div fxFlex="100">
+                    <!--<div  *ngIf="projectManagers.length > 0">-->
+                    <!--<mat-form-field style="text-align: right;" class="example-full-width">-->
+                    <!--<input class="form-control" type="text" placeholder="مدیر پروژه"-->
+                    <!--aria-label="Number" matInput -->
+                    <!--[matAutocomplete]="auto" required>-->
+                    <!--<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnPM">-->
+                    <!--<mat-option *ngFor="let option of filteredOptionsPM | async" [value]="option">-->
+                    <!--{{ option.Name}}-->
+                    <!--</mat-option>-->
+                    <!--</mat-autocomplete>-->
+                    <!--&lt;!&ndash;<mat-error style="text-align: right;" *ngIf="formGp.get('PMId_User').hasError('required')">&ndash;&gt;-->
+                    <!--&lt;!&ndash;* لطفا مدیر پروژه را انتخاب نمایید <strong>(اجباری)</strong>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</mat-error>&ndash;&gt;-->
+                    <!--</mat-form-field>-->
+                    <!--</div>-->
+                    <div fxLayout="column">
+                      <!--                      <mat-form-field>-->
+                      <!--                        <input class="form-control" formControlName="searching" matInput-->
+                      <!--                               (keyup)="onContractSearch($event)"-->
+                      <!--                               placeholder="عنوان و یا کد قرارداد مورد نظر خود را جستجو کنید...">-->
+                      <!--<mat-error style="text-align: right;" *ngIf="formGp.get('FullTitle_Contract').hasError('required')">-->
+                      <!--* لطفا عنوان کامل قرارداد را وارد نمایید <strong>(اجباری)</strong>-->
+                      <!--</mat-error>-->
+                      <!--                      </mat-form-field>-->
+                      <!--                      <div fxLayout="column">-->
+                      <!--                        <mat-form-field >-->
+                      <!--                          <input type="text" (keyup)="onContractSearch($event)"-->
+                      <!--                                 placeholder="عنوان و یا کد قرارداد مورد نظر خود را جستجو کنید..."-->
+                      <!--                                 matInput-->
+                      <!--                                 [formControl]="formGp.controls['searching']"-->
+                      <!--                                 [matAutocomplete]="auto" style="width: 100% !important;">-->
+                      <!--                          <mat-autocomplete #auto="matAutocomplete">-->
+                      <!--                            <mat-option *ngFor="let fo of filteredOptions | async"-->
+                      <!--                                        [value]="fo.Title">-->
+                      <!--                              {{fo.Title}}-->
+                      <!--                            </mat-option>-->
+                      <!--                          </mat-autocomplete>-->
+                      <!--                        </mat-form-field>-->
+                      <mat-form-field *ngIf="defaultContracts">
+                        <mat-select [formControl]="contractMultiCtrl" placeholder="انتخاب قرارداد..."
+                                    #singleSelect required>
+                          <mat-option>
+                            <ngx-mat-select-search
+                              placeholderLabel="عنوان و یا کد قرارداد مورد نظر خود را جستجو کنید..."
+                              [noEntriesFoundLabel]="'عنوان یا قراردادی پیدا نشد...'"
+                              [formControl]="contractMultiFilterCtrl"></ngx-mat-select-search>
+                          </mat-option>
+                          <mat-option *ngFor="let fc of filteredContract | async" [value]="fc.Title"
+                                      (onSelectionChange)="onContractClick(fc)">
+                            {{ fc.Title }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-hint *ngIf="!isReadOnly" fxFlexAlign="start"><strong>در صورت نبودن قرارداد / پروژه در لیست بر
+                        روی
+                        <i style="cursor: pointer;"
+                           (click)="onAddContractt()"
+                           class="fas fa-plus"></i>
+                        کلیک نمایید</strong></mat-hint>
+                      <!--                      </div>-->
+
+                      <!--                      <ul id="myUL" style="padding-top: 20px;" *ngIf="!selectedContract">-->
+                      <!--                        <div *ngFor="let contract of contracts; let i = index">-->
+                      <!--                          <li *ngIf="i < 5" style="cursor: pointer;padding: 10px 0;">-->
+                      <!--                            <a (click)="onContractClick(contract)">{{ contract.Title }}</a>-->
+                      <!--                          </li>-->
+                      <!--                        </div>-->
+                      <!--                        <p style="text-align: justify; direction: rtl;margin-top: 20px;color: #0f456d;"-->
+                      <!--                           *ngIf="formGp.get('searching').value !== null">-->
+                      <!--                          <span *ngIf="formGp.get('searching').value !== ''">تعداد نتایج : </span>-->
+                      <!--                          <span *ngIf="formGp.get('searching').value !== ''">{{ contracts.length }}</span>-->
+                      <!--                        </p>-->
+                      <!--                      </ul>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="padding: 25px;margin: 0">
+                  <hr style="height: 1px;width: 100%;background: #ffffff;" *ngIf="selectedContract">
+                  <div fxFlex="100" *ngIf="selectedContract">
+                    <h6 style="text-align: justify;direction: rtl">قرارداد / پروژه انتخاب شده : </h6>
+                  </div>
+                  <table class="table table-bordered" *ngIf="selectedContract">
+                    <tbody>
+                    <tr>
+                      <th>عنوان قرارداد / پروژه</th>
+                      <td>{{ selectedContract.Title }}</td>
+                    </tr>
+                    <tr>
+                      <th>واحد سازمانی</th>
+                      <td>{{ selectedContract.Unit }}</td>
+                    </tr>
+                    <tr>
+                      <th>گروه متولی</th>
+                      <td>{{ selectedContract.SubUnit }}</td>
+                    </tr>
+                    <tr>
+                      <th>تاریخ شروع پروژه</th>
+                      <td>{{ selectedContract.StartDate }}</td>
+                    </tr>
+                    <tr>
+                      <th>نام طرف قرارداد</th>
+                      <td>{{ selectedContract.Contractor }}</td>
+                    </tr>
+                    <tr>
+                      <th>نام کارفرما</th>
+                      <td>{{ selectedContract.RaiPart }}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!--</mat-tab>-->
+                <!--<mat-tab label="افزودن قرارداد جدید"> B </mat-tab>-->
+                <!--</mat-tab-group>-->
+              </div>
+            </section>
+
+            <div class="row" style="display: none">
+              <div fxFlex="48">
+                <div>
+                  <!--<mat-form-field>-->
+                  <input formControlName="Story" [(ngModel)]="model.editorData" type="text" style="display: none;">
+                  <!--</mat-form-field>-->
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <br>
+
+          <section style="background-color: unset">
+            <div class="kms-row">
+              <div fxFlex="100" fxLayout="column">
+                <label fxFlexAlign="start" for="c2">شرح داستان <span style="color: #da345a;">*</span></label>
+                <ckeditor [editor]="Editor" [(ngModel)]="model.editorData" id="c2" [config]="ckConfig"></ckeditor>
+                <mat-error style="text-align: right;color: #0f456d;"
+                           *ngIf="formGp.get('Story').hasError('required') || model.editorData === null">
+                  * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                </mat-error>
+                <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Story').hasError('minlength')">
+                  * حداقل 50 کاراکتر وارد نمایید<strong>!</strong>
+                </mat-error>
+                <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Story').hasError('maxlength')">
+                  * حداکثر 3000 کاراکتر وارد نمایید<strong>!</strong>
+                </mat-error>
+              </div>
+            </div>
+            <div class="kms-row">
+              <div fxFlex="100" fxLayout="column">
+                <label fxFlexAlign="start" for="c3">درس آموخته <span style="color: #da345a;">*</span></label>
+                <ckeditor [editor]="Editor" [(ngModel)]="model2.editorData" id="c3" [config]="ckConfig"></ckeditor>
+                <mat-error style="text-align: right;color: #0f456d;"
+                           *ngIf="formGp.get('FullDescription').hasError('required')">
+                  * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                </mat-error>
+                <mat-error style="text-align: justify;direction: rtl"
+                           *ngIf="formGp.get('FullDescription').hasError('minlength')">
+                  * حداقل 50 کاراکتر وارد نمایید<strong>!</strong>
+                </mat-error>
+                <mat-error style="text-align: justify;direction: rtl"
+                           *ngIf="formGp.get('FullDescription').hasError('maxlength')">
+                  * حداکثر 3000 کاراکتر وارد نمایید<strong>!</strong>
+                </mat-error>
+              </div>
+            </div>
+            <div class="kms-row">
+              <div fxFlex="100" fxLayout="column">
+                <label fxFlexAlign="start" for="c4">راهکار پیشنهادی <span style="color: #da345a;">*</span></label>
+                <ckeditor [editor]="Editor" [(ngModel)]="model3.editorData" id="c4" [config]="ckConfig"></ckeditor>
+                <mat-error style="text-align: right;color: #0f456d;"
+                           *ngIf="formGp.get('ProposedSolution').hasError('required')">
+                  * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                </mat-error>
+                <mat-error style="text-align: justify;direction: rtl"
+                           *ngIf="formGp.get('ProposedSolution').hasError('minlength')">
+                  * حداقل 50 کاراکتر وارد نمایید<strong>!</strong>
+                </mat-error>
+                <mat-error style="text-align: justify;direction: rtl"
+                           *ngIf="formGp.get('ProposedSolution').hasError('maxlength')">
+                  * حداکثر 3000 کاراکتر وارد نمایید<strong>!</strong>
+                </mat-error>
+              </div>
+            </div>
+            <br>
+            <div class="kms-row" style="border: 1px solid gainsboro;padding: 10px">
+              <div fxFlex="100" fxLayout="column">
+                <label fxFlexAlign="start" for="c4">مستندات (اختیاری) : </label>
+                <br>
+                <div fxFlex="48">
+                  <ul id="myUL22" style="padding-top: 20px;" *ngIf="documents">
+                    <li *ngFor="let document of documents" style="font-family: IranSans">
+                      <a style="float: right;cursor: pointer;"
+                         [href]="'http://rpmo.rai.ir/Docs/kms/_layouts/15/download.aspx?SourceUrl=' + document.ServerRelativeUrl"
+                         target="_blank">{{ document.Name }}</a>
+                      <i class="fas fa-times" (click)="onDeleteDoc(document)"></i>
+                    </li>
+                  </ul>
+                </div>
+                <br>
+                <input type="File" id="inputTypeFiles" (change)="onUploadFile($event)"/>
+                <hr>
+                <mat-progress-bar *ngIf="pValue" mode="determinate" [value]="pValue"></mat-progress-bar>
+                <span *ngIf="pValue">{{ pValue }}</span>
+              </div>
+            </div>
+            <div class="kms-row" fxLayoutAlign="center">
+              <div fxFlex="40" fxLayoutAlign="center">
+                <button *ngIf="!postEdit && !postEditDesc"
+                        style="width: 100%;background-image: linear-gradient(40deg,#45cafc,#303f9f)!important;"
+                        class="btn btn-primary" (click)="onAddPost()" [disabled]="buttonStatus">افزودن درس آموخته
+                </button>
+                <button *ngIf="postEdit && postEditDesc" style="width: 100%;" class="btn btn-primary"
+                        (click)="onUpdatePost()">بروز رسانی درس آموخته
+                </button>
+              </div>
+            </div>
+          </section>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

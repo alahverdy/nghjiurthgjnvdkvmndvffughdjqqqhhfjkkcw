@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12">
+    <table *ngIf="userProfile" class="table table-bordered">
+      <tbody>
+      <tr>
+        <th>نام و نام خانوادگی</th>
+        <td>{{ userProfile.Title }}</td>
+      </tr>
+      <tr>
+        <th>سمت</th>
+        <td>{{ userProfile.Position }}</td>
+      </tr>
+      <tr>
+        <th>محل خدمت</th>
+        <td *ngIf="userProfile.RaiPart">{{ userProfile.RaiPart }}</td>
+        <td *ngIf="userProfile.Contractor">{{ userProfile.Contractor }}</td>
+      </tr>
+      <tr>
+        <th>ایمیل</th>
+        <td>{{ userProfile.Email }}</td>
+      </tr>
+      <tr>
+        <th>تلفن</th>
+        <td>{{userProfile.PhoneNumber }}</td>
+      </tr>
+      <tr>
+        <th>موبایل</th>
+        <td>{{ userProfile.MobileNumber }}</td>
+      </tr>
+      <tr>
+        <th>حوزه کاری</th>
+        <td>{{ userProfile.ActivityScope }}</td>
+      </tr>
+      <tr>
+        <th>عنوان شغل</th>
+        <td>{{ userProfile.JobTitle }}</td>
+      </tr>
+      <tr>
+        <th>سابقه کار</th>
+        <td>{{ userProfile.Experience }}</td>
+      </tr>
+      <tr>
+        <th>سطح تحصیلات</th>
+        <td>{{ userProfile.EducationLevel }}</td>
+      </tr>
+      <tr>
+        <th>رشته تحصیلی</th>
+        <td>{{ userProfile.Major }}</td>
+      </tr>
+      <tr>
+        <th>آدرس</th>
+        <td>{{ userProfile.Address }}</td>
+      </tr>
+      <!--<tr>-->
+        <!--<th>وضعیت اطلاعات</th>-->
+        <!--<td *ngIf="userProfile.IsComplete" style="color: #2c9b27">کامل</td>-->
+        <!--<td *ngIf="!userProfile.IsComplete" style="color: #da345a;">ناقص</td>-->
+      <!--</tr>-->
+      </tbody>
+    </table>
+  </div>
+</div>

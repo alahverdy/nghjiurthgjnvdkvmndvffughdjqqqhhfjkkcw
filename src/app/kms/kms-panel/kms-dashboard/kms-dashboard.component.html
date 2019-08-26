@@ -1,0 +1,104 @@
+<div class="row kms-main-row">
+  <div class="col-md-3">
+    <mat-card style="background: #ecfffe9e;">
+      <h5>تعداد درس آموخته ها</h5>
+      <div class="row" style="margin: 0;">
+        <div class="col-md-6 kms-counting-box">{{ lessonLearnedCounts }}</div>
+        <div class="col-md-6 kms-counting-box kms-icon"><i class="fas fa-book-open"></i></div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-md-3">
+    <mat-card style="background: #f2ecff9e;">
+      <h5>درس آموخته های داوری شده</h5>
+      <div class="row" style="margin: 0;">
+        <div class="col-md-6 kms-counting-box">{{ judgedCounts }}</div>
+        <div class="col-md-6 kms-counting-box kms-icon"><i class="fas fa-gavel"></i></div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-md-3">
+    <mat-card style="background: #fcffec9e;">
+      <h5>تعداد پرسش ها</h5>
+      <div class="row" style="margin: 0;">
+        <div class="col-md-6 kms-counting-box">{{ questionCounts }}</div>
+        <div class="col-md-6 kms-counting-box kms-icon"><i class="fas fa-book-reader"></i></div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-md-3">
+    <mat-card style="background: #ecfbff9e;">
+      <h5>تعداد کاربران</h5>
+      <div class="row" style="margin: 0;">
+        <div class="col-md-6 kms-counting-box">{{ userCounts }}</div>
+        <div class="col-md-6 kms-counting-box kms-icon"><i class="fas fa-user"></i></div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<div class="row kms-main-row">
+  <div class="col-md-12">
+    <mat-card>
+      <h5>تعداد درس آموخته های ارسالی</h5>
+      <highcharts-chart *ngIf="showChart"
+        [Highcharts]="Highcharts"
+        [options]="chartOptions"
+        style="width: 100%; height: 400px; display: block;"
+      ></highcharts-chart>
+    </mat-card>
+  </div>
+  <div class="col-md-12">
+    <mat-card>
+      <h5>میانگین امتیازات داوران</h5>
+      <highcharts-chart *ngIf="showChart2"
+        [Highcharts]="Highcharts2"
+        [options]="chartOptions2"
+        style="width: 100%; height: 400px; display: block;"
+      ></highcharts-chart>
+    </mat-card>
+  </div>
+</div>
+<div class="row kms-main-row">
+  <div class="col-md-4">
+    <mat-card>
+      <h5>جدیدترین درس آموخته ها</h5>
+      <mat-list role="list">
+        <mat-list-item *ngFor="let top of topLessonLearneds; let i = index" role="listitem">
+          <p>
+          <span class="kms-dash-list kms-dash-num">{{ i + 1 }}.</span>
+          <span class="kms-dash-list" style="cursor: pointer;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;max-width: 75%;">{{ top.Title }}</span>
+          <span class="km-dash-date">{{ top.Created }}</span>
+        </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+  <div class="col-md-4">
+    <mat-card>
+      <h5>جدیدترین پرسش ها</h5>
+      <mat-list role="list">
+        <mat-list-item *ngFor="let top of topQuestions; let i = index" role="listitem">
+          <p>
+            <span class="kms-dash-list kms-dash-num">{{ i + 1 }}.</span>
+            <span class="kms-dash-list" style="cursor: pointer;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;max-width: 75%;">{{ top.Title }}</span>
+            <span class="km-dash-date">{{ top.Created }}</span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+  <div class="col-md-4">
+    <mat-card>
+      <h5>جدیدترین درس آموخته های داوری شده</h5>
+      <mat-list role="list">
+        <mat-list-item *ngFor="let top of topJudgedLessonLearneds; let i = index" role="listitem">
+          <p>
+            <span class="kms-dash-list kms-dash-num">{{ i + 1 }}.</span>
+            <span class="kms-dash-list" style="cursor: pointer;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;max-width: 75%;">{{ top.Title }}</span>
+            <span class="km-dash-date">{{ top.Created }}</span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+</div>

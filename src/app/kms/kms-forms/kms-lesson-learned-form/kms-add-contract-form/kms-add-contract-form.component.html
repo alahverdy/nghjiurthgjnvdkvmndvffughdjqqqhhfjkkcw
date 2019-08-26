@@ -1,0 +1,128 @@
+<div class="row">
+      <div class="col-md-12">
+        <h5>افزودن قرارداد جدید</h5>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <form [formGroup]="formGp">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="Title"
+                         placeholder="عنوان قرارداد / پروژه" required>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Title').hasError('required')">
+                    * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                  </mat-error>
+                  <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Title').hasError('minlength')">
+                    * حداقل 5 کاراکتر وارد نمایید<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <mat-form-field>
+                  <mat-select formControlName="Unit" placeholder="واحد سازمانی" (selectionChange)="onSelectUnit($event)" required>
+                    <mat-option *ngFor="let unit of units" [value]="unit.ID">
+                      {{ unit.Title }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Unit').hasError('required')">
+                    * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <mat-form-field>
+                  <mat-select formControlName="SubUnit" placeholder="گروه متولی" (selectionChange)="onChangeSubUnit()" required>
+                    <mat-option *ngFor="let subUnit of subUnits" [value]="subUnit.ID">
+                      {{ subUnit.Title }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('SubUnit').hasError('required')">
+                    * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <mat-form-field>
+                  <mat-select formControlName="RaiPart" placeholder="کارفرما" required>
+                    <mat-option *ngFor="let raiPart of raiParts" [value]="raiPart.ID">
+                      {{ raiPart.Title }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('RaiPart').hasError('required')">
+                    * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+              <mat-form-field>
+                <input matInput formControlName="StartDate"
+                       placeholder="تاریخ شروع قرارداد" required>
+                <mat-error style="text-align: right;" *ngIf="formGp.get('StartDate').hasError('required')">
+                  * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                </mat-error>
+                <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('StartDate').hasError('minlength') || formGp.get('StartDate').hasError('maxlength')">
+                  * فرمت قابل قبول تاریخ : 1395/05/07<strong></strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="Pm"
+                         placeholder="مدیر پروژه" required>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Pm').hasError('required')">
+                    * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                  </mat-error>
+                  <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Pm').hasError('minlength')">
+                    * حداقل 5 کاراکتر وارد نمایید<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="Contractor"
+                         placeholder="طرف قرارداد" required>
+                  <mat-error style="text-align: right;" *ngIf="formGp.get('Contractor').hasError('required')">
+                    * وارد کردن این فیلد الزامی می باشد<strong>!</strong>
+                  </mat-error>
+                  <mat-error style="text-align: justify;direction: rtl" *ngIf="formGp.get('Contractor').hasError('minlength')">
+                    * حداقل 5 کاراکتر وارد نمایید<strong>!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <button class="btn btn-primary" [mat-dialog-close]="formGp" style="width: 100%">افزودن قرارداد</button>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2"></div>
+    </div>

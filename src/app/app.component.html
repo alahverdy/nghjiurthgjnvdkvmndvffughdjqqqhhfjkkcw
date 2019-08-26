@@ -1,0 +1,8 @@
+<div class="container-fluid" fxLayout="column">
+  <app-kms-header style="position: fixed;top: 0;width: 100%;z-index: 10"></app-kms-header>
+  <app-kms-user-form *ngIf="!isUserProfileValid" (validEmit)="onValidEmitChange($event)"></app-kms-user-form>
+  <div style="min-height: 650px;margin-top: 100px">
+    <router-outlet *ngIf="isUserProfileValid" style="min-height: 650px"></router-outlet>
+  </div>
+  <app-kms-footer></app-kms-footer>
+</div>
