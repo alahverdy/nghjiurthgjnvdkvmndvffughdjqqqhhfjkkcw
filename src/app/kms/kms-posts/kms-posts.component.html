@@ -12,7 +12,8 @@
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-description style="direction: rtl;font-family: IranSans;text-align: justify;margin-bottom: 15px;">
+          <mat-panel-description
+            style="direction: rtl;font-family: IranSans;text-align: justify;margin-bottom: 15px;">
             جستجو در عنوان درس آموخته
           </mat-panel-description>
         </mat-expansion-panel-header>
@@ -21,9 +22,12 @@
                class="form-control" matInput
                placeholder="جستجو در عنوان درس آموخته" (keyup)="onSearch($event)">
       </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-description style="direction: rtl;font-family: IranSans;text-align: justify;margin-bottom: 15px;">
+          <mat-panel-description
+            style="direction: rtl;font-family: IranSans;text-align: justify;margin-bottom: 15px;">
             جستجو در نام نویسنده
           </mat-panel-description>
         </mat-expansion-panel-header>
@@ -32,20 +36,6 @@
                placeholder="جستجو در نام نویسنده" (keyup)="onAuthorSearch($event)">
       </mat-expansion-panel>
     </mat-accordion>
-
-    <mat-card class="example-card">
-      <h5 style="direction: rtl;text-align: justify;">محور های درس آموخته</h5>
-      <hr>
-      <div class="row">
-        <section class="example-section">
-          <div class="col-md-12" *ngFor="let lessonLearnedTopic of lessonLearnedTopics; let i = index">
-            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, 'to')" class="example-margin">
-              {{ lessonLearnedTopic.Title }}
-            </mat-checkbox>
-          </div>
-        </section>
-      </div>
-    </mat-card>
     <mat-card class="example-card">
       <h5 style="direction: rtl;text-align: justify;">عملیات های درس آموخته</h5>
       <hr>
@@ -54,6 +44,19 @@
           <div class="col-md-12" *ngFor="let lessonLearnedOperation of lessonLearnedOperations; let i = index">
             <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, 'op')" class="example-margin">
               {{ lessonLearnedOperation.Title }}
+            </mat-checkbox>
+          </div>
+        </section>
+      </div>
+    </mat-card>
+    <mat-card class="example-card">
+      <h5 style="direction: rtl;text-align: justify;">محور های درس آموخته</h5>
+      <hr>
+      <div class="row">
+        <section class="example-section">
+          <div class="col-md-12" *ngFor="let lessonLearnedTopic of lessonLearnedTopics; let i = index">
+            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, 'to')" class="example-margin">
+              {{ lessonLearnedTopic.Title }}
             </mat-checkbox>
           </div>
         </section>
@@ -96,10 +99,10 @@
         </div>
         <div fxLayout="row wrap">
           <button mat-button color="primary" (click)="sortData('topScore')">بالاترین‌امتیاز</button>
-          <button mat-button color="warn" (click)="sortData('bottomScore')">کم ترین‌امتیاز</button>
-          <button mat-button color="primary" (click)="sortData('topLike')">محبوب‌ترین</button>
+          <!--          <button mat-button color="warn" (click)="sortData('bottomScore')">کم ترین‌امتیاز</button>-->
+          <button mat-button color="warn" (click)="sortData('topLike')">محبوب‌ترین</button>
           <button mat-button color="primary" (click)="sortData('topDate')">جدید‌‌ترین</button>
-          <button mat-button color="warn" (click)="sortData('bottomDate')">قدیمی‌ترین</button>
+          <!--          <button mat-button color="warn" (click)="sortData('bottomDate')">قدیمی‌ترین</button>-->
         </div>
       </mat-card-content>
     </mat-card>

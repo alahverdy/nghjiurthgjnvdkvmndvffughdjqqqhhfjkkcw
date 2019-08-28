@@ -10,6 +10,11 @@ import {CommentModel} from '../shared/models/kms/Comment.model';
 import {PostLikesModel} from '../shared/models/kms/PostLikes.model';
 import {PostModel} from '../shared/models/kms/Post.model';
 
+export class Test {
+  name: number;
+  count: number;
+}
+
 @Component({
   selector: 'app-kms',
   templateUrl: './kms.component.html',
@@ -38,13 +43,17 @@ export class KmsComponent implements OnInit {
   topLessonLearneds: { ID, Title, Created }[] = [];
   topLessonLearnedsScores: { ID, Title, Score }[] = [];
   topLessonLearnedsLikes: { ID, PostId }[] = [];
+  topLessonLearnedsLikes2 = [];
   topLessonLearnedsLikesWithFilter: { Title }[] = [];
   displayedColumns: string[] = ['Title', 'Created'];
   displayedColumns2: string[] = ['Title', 'Like'];
   dataSource = [];
   dataSourceForBestScores = [];
-  dataSourceForLikes: { Title, Like }[] = [];
+  dataSourceForLikes = [];
   showPopular = false;
+  test1: Test[] = new Array<Test>();
+  oop = 1;
+  condition = false;
 
   constructor(private KmsService: KmsService,
               private router: Router,
@@ -58,25 +67,53 @@ export class KmsComponent implements OnInit {
       (data: { ID, PostId }[]) => {
         this.topLessonLearnedsLikes = data;
         console.log(this.topLessonLearnedsLikes);
-
         for (let i = 0; this.topLessonLearnedsLikes.length > i; i++) {
-          this.KmsService.getTopLessonLearnedsLikes(this.topLessonLearnedsLikes[i].PostId).subscribe(
+          this.topLessonLearnedsLikes2.push(this.topLessonLearnedsLikes[i].PostId);
+        }
+        console.log(this.topLessonLearnedsLikes2);
+        let sorted_arr = this.topLessonLearnedsLikes2.slice().sort();
+        console.log(sorted_arr);
+        for (let i = 0; i < sorted_arr.length - 1; i++) {
+          if (sorted_arr[i + 1] === sorted_arr[i]) {
+            this.oop++;
+          } else {
+            this.test1.push({
+              name: sorted_arr[i],
+              count: this.oop
+            });
+            this.oop = 1;
+          }
+        }
+        this.test1.sort(function (a, b) {
+          return b.count - a.count;
+        });
+
+        const topLikes = [];
+        topLikes.push(this.test1[0].name, this.test1[1].name, this.test1[2].name);
+
+
+        for (let i = 0; topLikes.length > i; i++) {
+          this.KmsService.getTopLessonLearnedsLikes(topLikes[i]).subscribe(
             (data1: { Title }[]) => {
               if (data1.length > 0) {
                 this.topLessonLearnedsLikesWithFilter = data1;
                 console.log(this.topLessonLearnedsLikesWithFilter);
                 this.dataSourceForLikes.push({
                   Title: this.topLessonLearnedsLikesWithFilter[0].Title,
-                  Like: this.test(i)
+                  Like: this.test1[i].count
                 });
               }
-              if (this.topLessonLearnedsLikes.length === i + 1) {
+              if (topLikes.length === i + 1) {
                 this.showPopular = true;
+              }
+              if (this.dataSourceForLikes.length === 3) {
+                this.condition = true;
+                this.spinner.hide();
               }
             });
         }
-
       });
+
     this.KmsService.getAllContents().subscribe(
       (data: ContentModel[]) => {
         this.contents = data;
@@ -97,7 +134,6 @@ export class KmsComponent implements OnInit {
         this.box3 = this.contents.filter(v => +v.ContentKind === 20);
         this.box4 = this.contents.filter(v => +v.ContentKind === 21);
         this.box5 = this.contents.filter(v => +v.ContentKind === 22);
-        this.spinner.hide();
       }
     );
 
@@ -152,7 +188,8 @@ export class KmsComponent implements OnInit {
       y = this.topLessonLearnedsScores.find(x => x.Score === title).ID;
     }
     if (type === 'like') {
-      y = this.topLessonLearnedsLikes.find(x => x.PostId === title).ID;
+      // y = this.topLessonLearnedsLikes.find(x => x.PostId === title).ID;
+      return alert('در حال توسعه ...')
     }
     this.router.navigate(['post'], {queryParams: {ID: y}, queryParamsHandling: 'merge'});
   }

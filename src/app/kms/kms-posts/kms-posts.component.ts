@@ -293,7 +293,7 @@ export class KmsPostsComponent implements OnInit {
           console.log(this.topLessonLearnedsLikes);
           this.posts = this.posts.filter(v => {
             for (let i = 0; i < this.topLessonLearnedsLikes.length; i++) {
-              if (v.ID === this.topLessonLearnedsLikes[i].ID) {
+              if (v.ID === this.topLessonLearnedsLikes[i].PostId) {
                 return true;
               }
             }

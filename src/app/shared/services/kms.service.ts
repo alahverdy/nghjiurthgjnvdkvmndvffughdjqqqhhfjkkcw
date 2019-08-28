@@ -1868,7 +1868,7 @@ export class KmsService {
     let headers = new HttpHeaders();
     headers = headers.set('ACCEPT', 'application/json;odata=verbose');
     return this.http.get(
-      'http://rpmo.rai.ir/PWA/kms/_api/web/lists/getbytitle(\'PostLikes\')/items?&$select=ID,PostId&$OrderBy=PostId desc&$top=3',
+      'http://rpmo.rai.ir/PWA/kms/_api/web/lists/getbytitle(\'PostLikes\')/items?&$select=ID,PostId&$OrderBy=PostId desc&$top=10000',
       {headers: headers}
     ).pipe(map((response: Response) => {
         const data = (<any>response).d.results;

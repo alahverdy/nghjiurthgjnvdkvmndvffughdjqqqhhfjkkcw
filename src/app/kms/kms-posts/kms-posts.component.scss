@@ -43,3 +43,7 @@ mat-card {
   text-align: right !important;
   font-family: IranSans !important;
 }
+
+.mat-accordion, .mat-expansion-panel:last-of-type {
+  margin-bottom: 10px !important;
+}

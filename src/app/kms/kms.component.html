@@ -1,7 +1,7 @@
 <!--<h2 style="text-align: center;">KMS HomePage</h2>-->
 <!--<hr>-->
 <div fxLayout="row" class="root" fxLayoutAlign="space-between">
-  <div fxFlex="20" class="right-side">
+  <div fxFlex="15" class="right-side">
     <div class="kms-main-box" *ngIf="DarsAmokhte">
       <div class="kms-main-header">
         <h6>{{ DarsAmokhte[0].Title }}</h6>
@@ -73,7 +73,7 @@
     </div>
 
   </div>
-  <div fxFlex="80" fxLayout="column" class="midle-side">
+  <div fxFlex="85" fxLayout="column" class="midle-side">
     <!-- <div class="row kms-main-box" *ngIf="box3" id="box3">
       <div class="col-md-12 kms-main-header">
         <h6>{{ box3[0].Title }}</h6>
@@ -422,7 +422,7 @@
         </div>
       </mat-card>
 
-      <mat-card style="min-height: 300px;" fxFlex="32" class="news">
+      <mat-card style="min-height: 300px;" fxFlex="32" class="news" *ngIf="condition">
         <div class="header" fxLayoutAlign="start center">
           <span class="mat-fa fa fa-network-wired" style="color: rgb(37, 160, 58);"></span>
           <span class="title">محبوب ترین درس آموخته ها</span>
