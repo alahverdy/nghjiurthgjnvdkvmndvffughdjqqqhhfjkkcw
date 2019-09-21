@@ -35,6 +35,9 @@ import {KmsJudgeFormComponent} from './kms/kms-forms/kms-lesson-learned-form/kms
 import {SafeHtmlPipe} from './shared/pipes/inner-html.pipe';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {KmsSearchInDescriptionComponent} from './kms/kms-posts/kms-search-in-description/kms-search-in-description.component';
+import {NgKnifeModule} from 'ng-knife';
+import {SpecialCharacterDirective} from './shared/specialChracter.directive';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     KmsRelatedQuestionLessonLearnedsComponent,
     KmsJudgeFormComponent,
     SafeHtmlPipe,
+    KmsSearchInDescriptionComponent,
+    SpecialCharacterDirective
   ],
   imports: [
     BrowserModule,
@@ -73,7 +78,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     HttpClientModule,
     HighchartsChartModule,
     FlexLayoutModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgKnifeModule
   ],
   providers: [KmsService],
   bootstrap: [AppComponent],
@@ -88,6 +94,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     KmsAddQuestionAnswerFormComponent,
     KmsRelatedQuestionLessonLearnedsComponent,
     KmsJudgeFormComponent,
+    KmsSearchInDescriptionComponent
 
   ],
 })

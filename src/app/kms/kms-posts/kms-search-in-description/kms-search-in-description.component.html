@@ -1,0 +1,16 @@
+<form [formGroup]="form" (ngSubmit)="onSearch(form.controls['userData'].value)">
+  <mat-form-field>
+    <input specialIsAlphaNumeric matInput placeholder="عبارت جستجو را وارد کنید"
+           [formControl]="form.controls['userData']" required>
+    <mat-error *ngIf="form.controls['userData'].hasError('minLength')">حداقل 5 کاراکتر الزامی است</mat-error>
+    <mat-error *ngIf="form.controls['userData'].hasError('required')"> ورود الزامی است</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">جستجو</button>
+</form>
+<div *ngIf="lessonLearnedFiltered.length > 0">
+  <label for="lessonLearnedFiltered">درس آموخته های زیر شامل موضوع جستجو شده می باشند :</label>
+  <mat-card id="lessonLearnedFiltered" *ngFor="let lf of lessonLearnedFiltered">
+    <button mat-button color="primary" (click)="onPostClick(lf.Post.Title)">{{lf.Post.Title}}</button>
+  </mat-card>
+</div>
+<button *ngIf="lessonLearnedFiltered.length === 0" mat-button color="warn">نتیجه ای وجود ندارد</button>

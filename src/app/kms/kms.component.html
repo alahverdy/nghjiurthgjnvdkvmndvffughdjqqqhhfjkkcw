@@ -359,7 +359,7 @@
       <mat-card style="min-height: 300px;" fxFlex="32" class="news">
         <div class="header" fxLayoutAlign="start center">
           <span class="mat-fa fa fa-network-wired"></span>
-          <span class="title">آخرین درس آموخته ها</span>
+          <span class="title">جدیدترین درس آموخته ها</span>
         </div>
         <div>
           <mat-card class="lastPostLearned">
@@ -438,7 +438,7 @@
                 <!-- Position Column -->
                 <ng-container matColumnDef="Title">
                   <th mat-header-cell *matHeaderCellDef> عنوان درس آموخته</th>
-                  <td mat-cell *matCellDef="let element" (click)="onPostClick(element.Like , 'like')"> {{element.Title}} </td>
+                  <td mat-cell *matCellDef="let element" (click)="onPostClick(element.Title , 'like')"> {{element.Title}} </td>
                 </ng-container>
 
                 <!-- Name Column -->
@@ -464,12 +464,12 @@
   </div> -->
 </div>
 <ngx-spinner
-  bdOpacity=0.9
-  bdColor="rgba(0,0,0,0.89)"
-  size="large"
-  color="#ffffff"
-  type="ball-spin-clockwise"
-  [fullScreen]="true"
+  bdOpacity = 0.9
+  bdColor = "rgba(0,91,166,0.19)"
+  size = "large"
+  color = "#3f51b5"
+  type = "line-scale-pulse-out"
+  [fullScreen] = "true"
 >
-  <p style="color: white"> ... لطفا صبر کنید </p>
+  <p style="color: white" > </p>
 </ngx-spinner>

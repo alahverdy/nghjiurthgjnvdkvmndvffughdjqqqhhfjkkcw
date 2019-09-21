@@ -100,7 +100,8 @@ export class KmsComponent implements OnInit {
                 console.log(this.topLessonLearnedsLikesWithFilter);
                 this.dataSourceForLikes.push({
                   Title: this.topLessonLearnedsLikesWithFilter[0].Title,
-                  Like: this.test1[i].count
+                  Like: this.test1[i].count,
+                  Id: this.test1[i].name
                 });
               }
               if (topLikes.length === i + 1) {
@@ -188,8 +189,9 @@ export class KmsComponent implements OnInit {
       y = this.topLessonLearnedsScores.find(x => x.Score === title).ID;
     }
     if (type === 'like') {
-      // y = this.topLessonLearnedsLikes.find(x => x.PostId === title).ID;
-      return alert('در حال توسعه ...')
+      console.log(this.dataSourceForLikes);
+      y = this.dataSourceForLikes.find(x => x.Title === title).Id;
+      // return alert('در حال توسعه ...');
     }
     this.router.navigate(['post'], {queryParams: {ID: y}, queryParamsHandling: 'merge'});
   }

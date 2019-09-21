@@ -34,6 +34,7 @@
     "highcharts": "^7.0.1",
     "highcharts-angular": "^2.4.0",
     "jalali-moment": "^3.2.3",
+    "ng-knife": "^0.2.8",
     "ngx-mat-select-search": "^1.4.2",
     "ngx-spinner": "^7.0.0",
     "rxjs": "~6.3.3",

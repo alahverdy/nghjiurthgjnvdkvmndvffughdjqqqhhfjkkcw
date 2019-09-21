@@ -30,6 +30,7 @@ import {AnswerModel} from '../models/kms/Answer.model';
 import {MyJudgePostModel} from '../models/kms/MyJudgePost.model';
 import {CriteriasModel} from '../models/kms/Criterias.model';
 import {PostLikesModel} from '../models/kms/PostLikes.model';
+import {LessonLearnedModel} from '../models/kms/LessonLearned.model';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,7 @@ export class KmsService {
   selectedTabSubject = new Subject();
   todayFaSubject = new Subject();
   todayFa: string;
-
+  posts: PostModel[] = [];
   constructor(private http: HttpClient) {
   }
 
@@ -975,6 +976,88 @@ export class KmsService {
             new RaiPartsModel(
               data[i].ID,
               data[i].Title,
+            )
+          );
+        }
+        return mainData;
+      }
+    ));
+  }
+
+  getLessonLearnedStep() {
+    const mainData: LessonLearnedModel[] = [];
+    let headers = new HttpHeaders();
+    headers = headers.set('ACCEPT', 'application/json;odata=verbose');
+    return this.http.get(
+      'http://rpmo.rai.ir/PWA/kms/_api/web/lists/getbytitle(\'LessonLearned\')/items?$select=ID,Post/Title,FullDescription,LessonLearnedStep/Title,LessonLearnedStep/ID&$expand=LessonLearnedStep,Post&$top=1000',
+      {headers: headers}
+    ).pipe(map((response: Response) => {
+        const data = (<any>response).d.results;
+        for (let i = 0; i < data.length; i++) {
+          mainData.push(
+            new LessonLearnedModel(
+              data[i].ID,
+              {
+                Title: data[i].Post.Title
+              },
+              data[i].FullDescription,
+              {
+                ID: data[i].LessonLearnedStep.ID,
+                Title: data[i].LessonLearnedStep.Title
+              },
+            )
+          );
+        }
+        return mainData;
+      }
+    ));
+  }
+
+  // getLessonLearnedFullDescription(searchedValue) {
+  //   const mainData: LessonLearnedModel[] = [];
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('ACCEPT', 'application/json;odata=verbose');
+  //   return this.http.get(
+  //     'http://rpmo.rai.ir/PWA/kms/_api/web/lists/getbytitle(\'LessonLearned\')/items?$filter=((substringof(\'' + searchedValue + '\',ID)))&$select=ID,Post/Title,FullDescription,LessonLearnedStep/Title,LessonLearnedStep/ID&$expand=LessonLearnedStep,Post&$top=10000',
+  //     {headers: headers}
+  //   ).pipe(map((response: Response) => {
+  //       const data = (<any>response).d.results;
+  //       for (let i = 0; i < data.length; i++) {
+  //         mainData.push(
+  //           new LessonLearnedModel(
+  //             data[i].ID,
+  //             data[i].Post,
+  //             data[i].FullDescription,
+  //             {
+  //               ID: data[i].LessonLearnedStep.ID,
+  //               Title: data[i].LessonLearnedStep.Title
+  //             },
+  //           )
+  //         );
+  //       }
+  //       return mainData;
+  //     }
+  //   ));
+  // }
+  getLessonLearnedFullDescription() {
+    const mainData: LessonLearnedModel[] = [];
+    let headers = new HttpHeaders();
+    headers = headers.set('ACCEPT', 'application/json;odata=verbose');
+    return this.http.get(
+      'http://rpmo.rai.ir/PWA/kms/_api/web/lists/getbytitle(\'LessonLearned\')/items?$select=ID,Post/Title,FullDescription,LessonLearnedStep/Title,LessonLearnedStep/ID&$expand=LessonLearnedStep,Post&$top=10000',
+      {headers: headers}
+    ).pipe(map((response: Response) => {
+        const data = (<any>response).d.results;
+        for (let i = 0; i < data.length; i++) {
+          mainData.push(
+            new LessonLearnedModel(
+              data[i].ID,
+              data[i].Post,
+              data[i].FullDescription,
+              {
+                ID: data[i].LessonLearnedStep.ID,
+                Title: data[i].LessonLearnedStep.Title
+              },
             )
           );
         }
@@ -2089,6 +2172,8 @@ export class KmsService {
             )
           );
         }
+        console.log(mainData);
+        this.posts = mainData;
         return mainData;
       }
     ));

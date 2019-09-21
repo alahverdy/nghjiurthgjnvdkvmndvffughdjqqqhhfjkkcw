@@ -6,6 +6,11 @@ import {CurrentUserModel} from '../../shared/models/kms/CurrentUser.model';
 import {LessonLearnedTopicModel} from '../../shared/models/kms/LessonLearnedTopic.model';
 import {OperationKindModel} from '../../shared/models/kms/OperationKind.model';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {RaiPartsModel} from '../../shared/models/kms/RaiParts.model';
+import {LessonLearnedModel} from '../../shared/models/kms/LessonLearned.model';
+import {KmsContractComponent} from './kms-post/kms-contract/kms-contract.component';
+import {MatDialog} from '@angular/material';
+import {KmsSearchInDescriptionComponent} from './kms-search-in-description/kms-search-in-description.component';
 
 @Component({
   selector: 'app-kms-posts',
@@ -17,20 +22,26 @@ export class KmsPostsComponent implements OnInit {
   posts: PostModel[] = [];
   postsSearchDef: PostModel[] = [];
   checking = false;
+  showResetFilter = false;
   lessonLearnedTopics: LessonLearnedTopicModel[] = [];
   lessonLearnedOperations: OperationKindModel[] = [];
+  lessonLearnedRaiParts: RaiPartsModel[] = [];
+  lessonLearned: LessonLearnedModel[] = [];
   lessonLearnedFiltred = [];
   lessonLearnedFiltredOp = [];
+  lessonLearnedFiltredRp = [];
   datesForFilter = [1395, 1396, 1397, 1398];
   dateFiltered = [];
-  scoresForFilter = [0, 1, 2, 3, 4];
+  // scoresForFilter = [0, 1, 2, 3, 4];
   refereesScore = [];
   searchInLesson: string;
   searchInAuthor: string;
   topLessonLearnedsLikes: { ID, PostId }[] = [];
+  userRaiParts: { ID, RaiPart }[] = [];
+  userRPSyncCounter = 0;
 
   constructor(private kmsService: KmsService, private spinner: NgxSpinnerService,
-              private router: Router) {
+              private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -46,16 +57,47 @@ export class KmsPostsComponent implements OnInit {
         this.lessonLearnedTopics = data;
       }
     );
+
+    this.kmsService.getAllRaiParts().subscribe(
+      (raiParts) => {
+        this.lessonLearnedRaiParts = raiParts;
+        console.log(this.lessonLearnedRaiParts);
+      }
+    );
+    this.kmsService.getLessonLearnedStep().subscribe(
+      (lessonLearnedData) => {
+        this.lessonLearned = lessonLearnedData;
+        console.log(this.lessonLearned);
+      }
+    );
+
+    this.kmsService.getAllUsersRaiPart().subscribe(
+      (userRaiParts: { ID, RaiPart }[]) => {
+        this.userRaiParts = userRaiParts;
+        this.onInjectLessonLearndRP();
+      }
+    );
+
     this.kmsService.getAllLessonLearned().subscribe(
       (data: PostModel[]) => {
         this.posts = data;
-        console.log(data);
-        this.postsSearchDef = this.posts;
-        this.mainPosts = data;
-        this.checking = true;
-        this.spinner.hide();
+        this.onInjectLessonLearndRP();
       }
     );
+  }
+
+  onInjectLessonLearndRP() {
+    this.userRPSyncCounter++;
+    if (this.userRPSyncCounter === 2) {
+      this.posts.filter(v => {
+        v.RaiPart = this.userRaiParts.filter(v2 => v2.ID === v.Creator)[0].RaiPart;
+      });
+      this.postsSearchDef = this.posts;
+      this.mainPosts = this.posts;
+      this.checking = true;
+      this.spinner.hide();
+      console.log(this.posts);
+    }
   }
 
   onChangeLessonLearnedTopic(e, index, type) {
@@ -63,6 +105,9 @@ export class KmsPostsComponent implements OnInit {
     this.searchInAuthor = '';
     this.searchInLesson = '';
     if (e.checked) {
+      if (type === 'rp') {
+        this.lessonLearnedFiltredRp.push(this.lessonLearnedRaiParts[index]);
+      }
       if (type === 'to') {
         this.lessonLearnedFiltred.push(this.lessonLearnedTopics[index]);
         console.log(this.lessonLearnedFiltred);
@@ -83,20 +128,25 @@ export class KmsPostsComponent implements OnInit {
         }
 
       }
-      if (type === 0 || 1 || 2 || 3 || 4) {
-        console.log(type);
-        for (let q = 0; this.scoresForFilter.length > q; q++) {
-          if (type === this.scoresForFilter[q]) {
-            if (this.refereesScore.includes(type)) {
-            } else {
-              this.refereesScore.push(this.scoresForFilter[index]);
-            }
-          }
-        }
-      }
+      // if (type === 0 || 1 || 2 || 3 || 4) {
+      //   console.log(type);
+      //   for (let q = 0; this.scoresForFilter.length > q; q++) {
+      //     if (type === this.scoresForFilter[q]) {
+      //       if (this.refereesScore.includes(type)) {
+      //       } else {
+      //         this.refereesScore.push(this.scoresForFilter[index]);
+      //       }
+      //     }
+      //   }
+      // }
+      this.showResetFilter = true;
 
     } else {
       let topicIndex;
+      if (type === 'rp') {
+        topicIndex = this.lessonLearnedFiltredRp.filter(v => v.ID !== this.lessonLearnedRaiParts[index].ID);
+        this.lessonLearnedFiltredRp = topicIndex;
+      }
       if (type === 'to') {
         topicIndex = this.lessonLearnedFiltred.filter(v => v.ID !== this.lessonLearnedTopics[index].ID);
         this.lessonLearnedFiltred = topicIndex;
@@ -116,22 +166,22 @@ export class KmsPostsComponent implements OnInit {
         }
       }
 
-      if (type === 0 || 1 || 2 || 3 || 4) {
-        for (let q = 0; this.scoresForFilter.length > q; q++) {
-          if (type === this.scoresForFilter[q]) {
-            if (this.refereesScore.includes(type)) {
-              topicIndex = this.refereesScore.filter(v => v !== this.scoresForFilter[index]);
-              this.refereesScore = topicIndex;
-            }
-          }
-        }
-      }
+      // if (type === 0 || 1 || 2 || 3 || 4) {
+      //   for (let q = 0; this.scoresForFilter.length > q; q++) {
+      //     if (type === this.scoresForFilter[q]) {
+      //       if (this.refereesScore.includes(type)) {
+      //         topicIndex = this.refereesScore.filter(v => v !== this.scoresForFilter[index]);
+      //         this.refereesScore = topicIndex;
+      //       }
+      //     }
+      //   }
+      // }
 
       console.log(topicIndex);
     }
 
     if (this.lessonLearnedFiltred.length !== 0 || this.lessonLearnedFiltredOp.length !== 0
-      || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0) {
+      || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredRp.length !== 0) {
       if (this.lessonLearnedFiltred.length !== 0) {
         if (this.lessonLearnedFiltredOp.length !== 0) {
           this.posts = this.mainPosts.filter(v => {
@@ -164,6 +214,25 @@ export class KmsPostsComponent implements OnInit {
           this.posts = this.mainPosts.filter(v => {
             for (let i = 0; i < this.lessonLearnedFiltredOp.length; i++) {
               if (v.OperationKind.ID === this.lessonLearnedFiltredOp[i].ID) {
+                return true;
+              }
+            }
+          });
+        }
+      }
+      if (this.lessonLearnedFiltredRp.length !== 0) {
+        if (this.lessonLearnedFiltred.length !== 0 || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredOp.length !== 0) {
+          this.posts = this.posts.filter(v => {
+            for (let i = 0; i < this.lessonLearnedFiltredRp.length; i++) {
+              if (+v.RaiPart === +this.lessonLearnedFiltredRp[i].ID) {
+                return true;
+              }
+            }
+          });
+        } else {
+          this.posts = this.mainPosts.filter(v => {
+            for (let i = 0; i < this.lessonLearnedFiltredRp.length; i++) {
+              if (+v.RaiPart === +this.lessonLearnedFiltredRp[i].ID) {
                 return true;
               }
             }
@@ -327,5 +396,24 @@ export class KmsPostsComponent implements OnInit {
         }
       );
     }
+  }
+
+
+  onClickForSearch() {
+    const dialogRef = this.dialog.open(KmsSearchInDescriptionComponent, {
+      width: '700px',
+      height: '700px',
+    });
+  }
+
+  resetFilter() {
+    this.spinner.show();
+    this.kmsService.getAllLessonLearned().subscribe(
+      (data: PostModel[]) => {
+        this.posts = data;
+        this.showResetFilter = false;
+        this.spinner.hide();
+      }
+    );
   }
 }
