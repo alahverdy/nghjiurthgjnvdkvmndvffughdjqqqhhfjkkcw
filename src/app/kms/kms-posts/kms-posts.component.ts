@@ -11,6 +11,7 @@ import {LessonLearnedModel} from '../../shared/models/kms/LessonLearned.model';
 import {KmsContractComponent} from './kms-post/kms-contract/kms-contract.component';
 import {MatDialog} from '@angular/material';
 import {KmsSearchInDescriptionComponent} from './kms-search-in-description/kms-search-in-description.component';
+import {LessonLearnedStepModel} from '../../shared/models/kms/LessonLearnedStep.model';
 
 @Component({
   selector: 'app-kms-posts',
@@ -30,6 +31,7 @@ export class KmsPostsComponent implements OnInit {
   lessonLearnedFiltred = [];
   lessonLearnedFiltredOp = [];
   lessonLearnedFiltredRp = [];
+  lessonLearnedFiltredSteps = [];
   datesForFilter = [1395, 1396, 1397, 1398];
   dateFiltered = [];
   // scoresForFilter = [0, 1, 2, 3, 4];
@@ -39,6 +41,8 @@ export class KmsPostsComponent implements OnInit {
   topLessonLearnedsLikes: { ID, PostId }[] = [];
   userRaiParts: { ID, RaiPart }[] = [];
   userRPSyncCounter = 0;
+  lessonLearnedSteps: LessonLearnedStepModel[];
+  lessonLearnedStepsData: LessonLearnedModel[];
 
   constructor(private kmsService: KmsService, private spinner: NgxSpinnerService,
               private router: Router, private dialog: MatDialog) {
@@ -82,6 +86,11 @@ export class KmsPostsComponent implements OnInit {
       (data: PostModel[]) => {
         this.posts = data;
         this.onInjectLessonLearndRP();
+      }
+    );
+    this.kmsService.getAllLessonLearnedSteps().subscribe(
+      (data: LessonLearnedStepModel[]) => {
+        this.lessonLearnedSteps = data;
       }
     );
   }
@@ -128,6 +137,9 @@ export class KmsPostsComponent implements OnInit {
         }
 
       }
+      if (type === 'ls') {
+        this.lessonLearnedFiltredSteps.push(this.lessonLearnedSteps[index]);
+      }
       // if (type === 0 || 1 || 2 || 3 || 4) {
       //   console.log(type);
       //   for (let q = 0; this.scoresForFilter.length > q; q++) {
@@ -165,7 +177,10 @@ export class KmsPostsComponent implements OnInit {
           }
         }
       }
-
+      if (type === 'ls') {
+        topicIndex = this.lessonLearnedFiltredSteps.filter(v => v.ID !== this.lessonLearnedSteps[index].ID);
+        this.lessonLearnedFiltredSteps = topicIndex;
+      }
       // if (type === 0 || 1 || 2 || 3 || 4) {
       //   for (let q = 0; this.scoresForFilter.length > q; q++) {
       //     if (type === this.scoresForFilter[q]) {
@@ -181,7 +196,7 @@ export class KmsPostsComponent implements OnInit {
     }
 
     if (this.lessonLearnedFiltred.length !== 0 || this.lessonLearnedFiltredOp.length !== 0
-      || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredRp.length !== 0) {
+      || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredRp.length !== 0 || this.lessonLearnedFiltredSteps.length !== 0) {
       if (this.lessonLearnedFiltred.length !== 0) {
         if (this.lessonLearnedFiltredOp.length !== 0) {
           this.posts = this.mainPosts.filter(v => {
@@ -202,7 +217,7 @@ export class KmsPostsComponent implements OnInit {
         }
       }
       if (this.lessonLearnedFiltredOp.length !== 0) {
-        if (this.lessonLearnedFiltred.length !== 0 || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0) {
+        if (this.lessonLearnedFiltred.length !== 0 || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredSteps.length !== 0) {
           this.posts = this.posts.filter(v => {
             for (let i = 0; i < this.lessonLearnedFiltredOp.length; i++) {
               if (v.OperationKind.ID === this.lessonLearnedFiltredOp[i].ID) {
@@ -221,7 +236,7 @@ export class KmsPostsComponent implements OnInit {
         }
       }
       if (this.lessonLearnedFiltredRp.length !== 0) {
-        if (this.lessonLearnedFiltred.length !== 0 || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredOp.length !== 0) {
+        if (this.lessonLearnedFiltred.length !== 0 || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredOp.length !== 0 || this.lessonLearnedFiltredSteps.length !== 0) {
           this.posts = this.posts.filter(v => {
             for (let i = 0; i < this.lessonLearnedFiltredRp.length; i++) {
               if (+v.RaiPart === +this.lessonLearnedFiltredRp[i].ID) {
@@ -240,7 +255,7 @@ export class KmsPostsComponent implements OnInit {
         }
       }
       if (this.dateFiltered.length !== 0) {
-        if (this.lessonLearnedFiltred.length !== 0 || this.lessonLearnedFiltredOp.length !== 0 || this.refereesScore.length !== 0) {
+        if (this.lessonLearnedFiltred.length !== 0 || this.lessonLearnedFiltredOp.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredSteps.length !== 0) {
           this.posts = this.posts.filter(v => {
             for (let i = 0; i < this.dateFiltered.length; i++) {
               if (v.CreatedDate.includes(this.dateFiltered[i])) {
@@ -259,7 +274,7 @@ export class KmsPostsComponent implements OnInit {
         }
       }
       if (this.refereesScore.length !== 0) {
-        if (this.lessonLearnedFiltred.length !== 0 || this.lessonLearnedFiltredOp.length !== 0 || this.dateFiltered.length !== 0) {
+        if (this.lessonLearnedFiltred.length !== 0 || this.lessonLearnedFiltredOp.length !== 0 || this.dateFiltered.length !== 0 || this.lessonLearnedFiltredSteps.length !== 0) {
           this.posts = this.posts.filter(v => {
             for (let i = 0; i < this.refereesScore.length; i++) {
               if (v.MainScore >= this.refereesScore[i] && v.MainScore < this.refereesScore[i] + 1) {
@@ -271,6 +286,34 @@ export class KmsPostsComponent implements OnInit {
           this.posts = this.mainPosts.filter(v => {
             for (let i = 0; i < this.refereesScore.length; i++) {
               if (v.MainScore >= this.refereesScore[i] && v.MainScore < this.refereesScore[i] + 1) {
+                return true;
+              }
+            }
+          });
+        }
+      }
+      if (this.lessonLearnedFiltredSteps.length !== 0) {
+        this.lessonLearnedStepsData = [];
+        this.lessonLearnedStepsData = this.lessonLearned.filter(v => {
+          for (let j = 0; j < this.lessonLearnedFiltredSteps.length; j++) {
+            if (+v.LessonLearnedStep.ID === +this.lessonLearnedFiltredSteps[j].ID) {
+              return true;
+            }
+          }
+        });
+        if (this.lessonLearnedFiltred.length !== 0 || this.dateFiltered.length !== 0 || this.refereesScore.length !== 0 || this.lessonLearnedFiltredOp.length !== 0 || this.lessonLearnedFiltredRp.length !== 0) {
+          console.log(this.lessonLearnedStepsData);
+          this.posts = this.posts.filter(v => {
+            for (let i = 0; i < this.lessonLearnedStepsData.length; i++) {
+              if (v.Title === this.lessonLearnedStepsData[i].Post.Title) {
+                return true;
+              }
+            }
+          });
+        } else {
+          this.posts = this.mainPosts.filter(v => {
+            for (let i = 0; i < this.lessonLearnedStepsData.length; i++) {
+              if (v.Title === this.lessonLearnedStepsData[i].Post.Title) {
                 return true;
               }
             }

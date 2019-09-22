@@ -89,6 +89,19 @@
         </section>
       </div>
     </mat-card>
+    <mat-card class="example-card">
+      <h5 style="direction: rtl;text-align: justify;">فیلتر بر اساس مرحله درس آموخته</h5>
+      <hr>
+      <div class="row">
+        <section class="example-section">
+          <div class="col-md-12" *ngFor="let ls of lessonLearnedSteps; let i = index">
+            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, 'ls')" class="example-margin">
+              {{ ls.Title }}
+            </mat-checkbox>
+          </div>
+        </section>
+      </div>
+    </mat-card>
 <!--    <mat-card class="example-card">-->
 <!--      <h5 style="direction: rtl;text-align: justify;">امتیاز داوری</h5>-->
 <!--      <hr>-->
