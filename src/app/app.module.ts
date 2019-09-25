@@ -38,6 +38,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import {KmsSearchInDescriptionComponent} from './kms/kms-posts/kms-search-in-description/kms-search-in-description.component';
 import {NgKnifeModule} from 'ng-knife';
 import {SpecialCharacterDirective} from './shared/specialChracter.directive';
+import {ExportAsModule} from 'ngx-export-as';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import {SpecialCharacterDirective} from './shared/specialChracter.directive';
     HighchartsChartModule,
     FlexLayoutModule,
     NgxSpinnerModule,
-    NgKnifeModule
+    NgKnifeModule,
+    ExportAsModule
   ],
   providers: [KmsService],
   bootstrap: [AppComponent],

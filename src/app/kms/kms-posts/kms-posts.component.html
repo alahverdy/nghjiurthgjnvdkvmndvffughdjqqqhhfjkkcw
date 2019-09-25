@@ -9,7 +9,9 @@
 <hr>
 <div class="row" style="margin: 10px 25px;min-height: 650px;direction: rtl;" *ngIf="posts">
   <div class="col-sm-12 col-md-12 col-lg-3">
-    <button *ngIf="showResetFilter" style="font-family: IranSans !important" (click)="resetFilter()" mat-raised-button color="warn">حذف فیلترها</button>
+    <button *ngIf="showResetFilter" style="font-family: IranSans !important" (click)="resetFilter()" mat-raised-button
+            color="warn">حذف فیلترها
+    </button>
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -102,19 +104,19 @@
         </section>
       </div>
     </mat-card>
-<!--    <mat-card class="example-card">-->
-<!--      <h5 style="direction: rtl;text-align: justify;">امتیاز داوری</h5>-->
-<!--      <hr>-->
-<!--      <div class="row">-->
-<!--        <section class="example-section">-->
-<!--          <div class="col-md-12" *ngFor="let sf of scoresForFilter; let i = index">-->
-<!--            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, sf)" class="example-margin">-->
-<!--              از <strong>{{ sf }}</strong> تا <strong>{{sf + 1}}</strong>-->
-<!--            </mat-checkbox>-->
-<!--          </div>-->
-<!--        </section>-->
-<!--      </div>-->
-<!--    </mat-card>-->
+    <!--    <mat-card class="example-card">-->
+    <!--      <h5 style="direction: rtl;text-align: justify;">امتیاز داوری</h5>-->
+    <!--      <hr>-->
+    <!--      <div class="row">-->
+    <!--        <section class="example-section">-->
+    <!--          <div class="col-md-12" *ngFor="let sf of scoresForFilter; let i = index">-->
+    <!--            <mat-checkbox (change)="onChangeLessonLearnedTopic($event, i, sf)" class="example-margin">-->
+    <!--              از <strong>{{ sf }}</strong> تا <strong>{{sf + 1}}</strong>-->
+    <!--            </mat-checkbox>-->
+    <!--          </div>-->
+    <!--        </section>-->
+    <!--      </div>-->
+    <!--    </mat-card>-->
   </div>
   <div class="col-sm-12 col-md-12 col-lg-9">
     <mat-card>
@@ -131,7 +133,9 @@
           <button mat-button color="primary" (click)="sortData('topDate')">جدید‌‌ترین</button>
           <!--          <button mat-button color="warn" (click)="sortData('bottomDate')">قدیمی‌ترین</button>-->
         </div>
-        <button style="font-family: IranSans !important;margin-right: 25px" mat-raised-button color="primary" (click)="onClickForSearch()">جستجو در متن درس آموخته</button>
+        <button style="font-family: IranSans !important;margin-right: 25px" mat-raised-button color="primary"
+                (click)="onClickForSearch()">جستجو در متن درس آموخته
+        </button>
       </mat-card-content>
     </mat-card>
     <h5 style="text-align: center; direction: rtl;color: #da345a" *ngIf="checking && posts.length === 0">درس آموخته ای
@@ -144,7 +148,7 @@
           </div>
           <mat-card-title
             style="cursor: pointer;color: #425961;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;"
-            (click)="onPostClick(post.ID)">{{ post.Title }}</mat-card-title>
+            (click)="onPostClick(post.ID,post.Author)">{{ post.Title }}</mat-card-title>
           <mat-card-subtitle>
             <span>امتیاز : </span>
             <span style="color: #425961;" *ngIf="post.MainScore">{{ post.MainScore }}</span>
@@ -188,13 +192,13 @@
   </div>
 </div>
 <ngx-spinner
-  bdOpacity = 0.9
-  bdColor = "rgba(0,91,166,0.19)"
-  size = "large"
-  color = "#3f51b5"
-  type = "line-scale-pulse-out"
-  [fullScreen] = "true"
+  bdOpacity=0.9
+  bdColor="rgba(0,91,166,0.19)"
+  size="large"
+  color="#3f51b5"
+  type="line-scale-pulse-out"
+  [fullScreen]="true"
 >
-  <p style="color: white" > </p>
+  <p style="color: white"></p>
 </ngx-spinner>
 <!--title="نام‌کاربری"-->

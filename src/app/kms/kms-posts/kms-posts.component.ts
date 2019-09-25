@@ -350,8 +350,14 @@ export class KmsPostsComponent implements OnInit {
   // }
 
 
-  onPostClick(id: number) {
+  onPostClick(id: number, author: string) {
     this.router.navigate(['post'], {queryParams: {ID: id}, queryParamsHandling: 'merge'});
+    this.relatedLessonLearened(author);
+  }
+
+  relatedLessonLearened(author: string) {
+    this.kmsService.relatedLessons = this.posts.filter(x => x.Author === author);
+    console.log(this.kmsService.relatedLessons);
   }
 
   onSearch(e) {

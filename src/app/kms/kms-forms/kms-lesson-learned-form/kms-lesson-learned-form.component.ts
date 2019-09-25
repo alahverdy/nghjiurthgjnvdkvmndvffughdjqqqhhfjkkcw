@@ -232,9 +232,9 @@ export class KmsLessonLearnedFormComponent implements OnInit, OnDestroy, AfterVi
       this.filteredContract.next(this.defaultContracts.slice());
       return;
     } else {
-      console.log(search1)
+      console.log(search1);
       search1 = search1.toLowerCase();
-      console.log(search1)
+      console.log(search1);
     }
     // filter the banks
     this.filteredContract.next(

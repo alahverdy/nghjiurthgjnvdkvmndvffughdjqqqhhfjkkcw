@@ -42,6 +42,8 @@ export class KmsService {
   todayFaSubject = new Subject();
   todayFa: string;
   posts: PostModel[] = [];
+  relatedLessons: PostModel[] = [];
+
   constructor(private http: HttpClient) {
   }
 
@@ -1295,13 +1297,15 @@ export class KmsService {
       {headers: headers}
     ).pipe(map((response: Response) => {
         const data = (<any>response).d.results[0];
+        const date = moment(data.StartDate1.substring(0, 10), 'YYYY/M/D').format('jYYYY/jM/jD');
+
         mainData = {
           ID: data.ID,
           Title: data.Title,
           Unit: data.UnitId.results[0],
           SubUnit: data.SubUnitId,
           PM: data.PMFullName,
-          StartDate: data.StartDate1.substring(0, 10),
+          StartDate: date,
           Contractor: data.ContractorFullName,
           RaiPart: data.RaiPartId,
           ContractType: 1,

@@ -1,27 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { KmsService } from '../../../shared/services/kms.service';
-import { FileModel } from '../../../shared/models/kms/File.model';
-import { PostModel } from '../../../shared/models/kms/Post.model';
-import { LessonLearnedDescModel } from '../../../shared/models/kms/LessonLearnedDesc.model';
-import { MatDialog } from '@angular/material';
-import { KmsContractComponent } from './kms-contract/kms-contract.component';
-import { FormGroup } from '@angular/forms';
-import { KmsAddCommentFormComponent } from '../../kms-forms/kms-lesson-learned-form/kms-add-comment-form/kms-add-comment-form.component';
-import { isUndefined } from 'util';
-import { CommentModel } from '../../../shared/models/kms/Comment.model';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {KmsService} from '../../../shared/services/kms.service';
+import {FileModel} from '../../../shared/models/kms/File.model';
+import {PostModel} from '../../../shared/models/kms/Post.model';
+import {LessonLearnedDescModel} from '../../../shared/models/kms/LessonLearnedDesc.model';
+import {MatDialog} from '@angular/material';
+import {KmsContractComponent} from './kms-contract/kms-contract.component';
+import {FormGroup} from '@angular/forms';
+import {KmsAddCommentFormComponent} from '../../kms-forms/kms-lesson-learned-form/kms-add-comment-form/kms-add-comment-form.component';
+import {isUndefined} from 'util';
+import {CommentModel} from '../../../shared/models/kms/Comment.model';
 import Swal from 'sweetalert2';
-import { UserProfileDataModel } from '../../../shared/models/kms/UserProfileData.model';
-import { RelatedQuestionAndAnwserModel } from '../../../shared/models/kms/RelatedQuestionAndAnwser.model';
-import { CurrentUserModel } from '../../../shared/models/kms/CurrentUser.model';
-import { MyJudgePostModel } from '../../../shared/models/kms/MyJudgePost.model';
+import {UserProfileDataModel} from '../../../shared/models/kms/UserProfileData.model';
+import {RelatedQuestionAndAnwserModel} from '../../../shared/models/kms/RelatedQuestionAndAnwser.model';
+import {CurrentUserModel} from '../../../shared/models/kms/CurrentUser.model';
+import {MyJudgePostModel} from '../../../shared/models/kms/MyJudgePost.model';
+import {ExportAsConfig, ExportAsService} from 'ngx-export-as';
 
 @Component({
   selector: 'app-kms-post',
   templateUrl: './kms-post.component.html',
   styleUrls: ['./kms-post.component.scss']
 })
-export class KmsPostComponent implements OnInit  {
+export class KmsPostComponent implements OnInit {
   post: PostModel;
   postDesc: LessonLearnedDescModel;
   tabs = [
@@ -41,11 +42,21 @@ export class KmsPostComponent implements OnInit  {
   isJudge = false;
   judgeId: number;
   myJudge: MyJudgePostModel;
+  // config: ExportAsConfig = {
+  //   type: 'pdf',
+  //   elementId: 'mytable',
+  //   options: {
+  //     jsPDF: {
+  //       orientation: 'landscape',
+  //     },
+  //   }
+  // };
+
 
   constructor(private route: ActivatedRoute,
-                      private kmsService: KmsService,
-                      private router: Router,
-                      private dialog: MatDialog) {
+              public kmsService: KmsService,
+              private router: Router, private exportAsService: ExportAsService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -70,6 +81,7 @@ export class KmsPostComponent implements OnInit  {
           this.kmsService.getLessonLearned(params.ID).subscribe(
             (data: PostModel) => {
               this.post = data;
+              console.log(this.post);
               this.kmsService.getAllFiles(this.post.Docs).subscribe(
                 (data: FileModel[]) => {
                   this.documents = data;
@@ -104,7 +116,7 @@ export class KmsPostComponent implements OnInit  {
               this.kmsService.getUserProfileDataWithIsComplete(currentUser.Id).subscribe(
                 (userProfile: UserProfileDataModel) => {
                   this.kmsService.getKMSUserRole(this.kmsService.userProfileData.ID).subscribe(
-                    (data: {ID, Role: number[]}) => {
+                    (data: { ID, Role: number[] }) => {
                       this.kmsService.searchInLessonLearnedOfMyJudge(this.post.ID, userProfile.ID).subscribe(
                         (myJudge: MyJudgePostModel[]) => {
                           if (myJudge.length !== 0) {
@@ -140,7 +152,6 @@ export class KmsPostComponent implements OnInit  {
       }
     );
   }
-
 
 
   onLikeClick() {
@@ -232,15 +243,38 @@ export class KmsPostComponent implements OnInit  {
     const dialogRef = this.dialog.open(KmsContractComponent, {
       width: '700px',
       height: '700px',
-      data: Title,
+      data: contract,
     });
   }
 
   onPostClick(pageName: string, id: number) {
-    this.router.navigate([pageName], { queryParams: { ID: id }, queryParamsHandling: 'merge'});
+    this.router.navigate([pageName], {queryParams: {ID: id}, queryParamsHandling: 'merge'});
   }
-
+  onPostClickForRelated(id: number) {
+    this.router.navigate(['post'], {queryParams: {ID: id}, queryParamsHandling: 'merge'});
+  }
   onPostClickPage(pageName: string) {
     this.router.navigate([pageName]);
   }
+
+  //
+  // exportAs(type, opt?: string) {
+  //   this.config.type = type;
+  //   if (opt) {
+  //     this.config.options.jsPDF.orientation = opt;
+  //   }
+  //   this.exportAsService.save(this.config, 'myFile').subscribe(() => {
+  //     // save started
+  //   });
+  // }
+  //
+  // exportAs1(type) {
+  //   this.config.type = type;
+  //   // if (opt) {
+  //   //   this.config.options.jsPDF.orientation = opt;
+  //   // }
+  //   this.exportAsService.save(this.config, 'myFile').subscribe(() => {
+  //     // save started
+  //   });
+  // }
 }

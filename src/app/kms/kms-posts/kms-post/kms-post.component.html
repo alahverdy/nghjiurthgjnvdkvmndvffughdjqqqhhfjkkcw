@@ -1,12 +1,17 @@
-<div style="min-height: 650px;">
+<!--<button (click)="exportAs('pdf', 'landscape')"> pdf</button>-->
+<!--<button (click)="exportAs1('png')">png</button>-->
+
+
+<!--<div style="min-height: 650px"  id="mytable">-->
+<div style="min-height: 650px">
   <mat-card class="kms-mat-card-basic" *ngIf="post">
     <div class="row" style="text-align: right;direction: rtl">
       <div class="col-md-12">
         <h2>
           <span style="font-size: 21px;color: #75847b;cursor: default;">{{ post.PostType }} : </span>
-          <span (click)="onPostClick('post', post.ID)" style="color: #425961;cursor: pointer;">{{ post.Title }}</span>
+          <p (click)="onPostClick('post', post.ID)" style="color: #425961;cursor: pointer;">{{ post.Title }}</p>
           <!--<span (click)="onPostClick('post/edit', post.ID)" class="kms-post-edit">-->
-            <!--<i class="fas fa-pencil-alt"></i>-->
+          <!--<i class="fas fa-pencil-alt"></i>-->
           <!--</span>-->
         </h2>
       </div>
@@ -16,8 +21,8 @@
           <span style="color: #425961;">{{ post.Author }}</span>
           <div class="row" style="float: left;">
             <div class="col-md-6" style="margin: 0;padding: 0;">
-                <i (click)="onLikeClick()" class="far fa-heart" *ngIf="!isLiked"></i>
-                <i (click)="onLikeClick()" class="fas fa-heart" *ngIf="isLiked"></i>
+              <i (click)="onLikeClick()" class="far fa-heart" *ngIf="!isLiked"></i>
+              <i (click)="onLikeClick()" class="fas fa-heart" *ngIf="isLiked"></i>
             </div>
             <div class="col-md-6" style="margin: 0;padding: 0;">
               <span style="margin-left: 8px" class="kms-likes" *ngIf="likes !== 0">{{ likes }}</span>
@@ -63,17 +68,19 @@
             <td *ngIf="post.MainScore === null">داوری نشده</td>
           </tr>
           <!--<tr>-->
-            <!--<th>تعداد بازدید :</th>-->
-            <!--<td>220</td>-->
+          <!--<th>تعداد بازدید :</th>-->
+          <!--<td>220</td>-->
           <!--</tr>-->
           <!--<tr>-->
-            <!--<th>تعداد لایک :</th>-->
-            <!--<td>150</td>-->
+          <!--<th>تعداد لایک :</th>-->
+          <!--<td>150</td>-->
           <!--</tr>-->
           <tr>
             <th>قرارداد :</th>
-            <td *ngIf="post.KMSContract.ID"><a (click)="onClickItem(post.KMSContract.ID, post.KMSContract.Title)">{{ post.KMSContract.Title }}</a></td>
-            <td *ngIf="post.Contract.ID"><a (click)="onClickItem(post.Contract.ID, post.Contract.Title)">{{ post.Contract.Title }}</a></td>
+            <td *ngIf="post.KMSContract.ID"><a
+              (click)="onClickItem(post.KMSContract.ID, post.KMSContract.Title)">{{ post.KMSContract.Title }}</a></td>
+            <td *ngIf="post.Contract.ID"><a
+              (click)="onClickItem(post.Contract.ID, post.Contract.Title)">{{ post.Contract.Title }}</a></td>
           </tr>
           </tbody>
         </table>
@@ -100,7 +107,9 @@
             <!--<p style="color:#da345a;text-align: justify; direction: rtl;font-family: IranSans;">این بخش بزودی قابل بهره برداری می باشد!</p>-->
             <ul id="myUL" style="padding-top: 20px;" *ngIf="documents">
               <li *ngFor="let document of documents" style="cursor: pointer;font-family: IranSans">
-                <a [href]="'http://rpmo.rai.ir/Docs/kms/_layouts/15/download.aspx?SourceUrl=' + document.ServerRelativeUrl" target="_blank">{{ document.Name }}</a>
+                <a
+                  [href]="'http://rpmo.rai.ir/Docs/kms/_layouts/15/download.aspx?SourceUrl=' + document.ServerRelativeUrl"
+                  target="_blank">{{ document.Name }}</a>
               </li>
             </ul>
           </mat-tab>
@@ -117,10 +126,13 @@
           <mat-tab [label]="tabs[4]">
             <mat-list role="list" *ngIf="questionAndAnwsers">
               <mat-list-item *ngFor="let questionAndAnwser of questionAndAnwsers;let i = index" role="listitem">
-                <p class="kms-list-item">{{ i + 1 + '. ' }}<a (click)="onPostClick('post/QA', questionAndAnwser.QuestionAndAnswer.ID)">{{ questionAndAnwser.QuestionAndAnswer.Title }}</a></p>
+                <p class="kms-list-item">{{ i + 1 + '. ' }}<a
+                  (click)="onPostClick('post/QA', questionAndAnwser.QuestionAndAnswer.ID)">{{ questionAndAnwser.QuestionAndAnswer.Title }}</a>
+                </p>
               </mat-list-item>
             </mat-list>
-            <p *ngIf="questionAndAnwsers.length === 0" style="color:#da345a;text-align: justify; direction: rtl;font-family: IranSans;">
+            <p *ngIf="questionAndAnwsers.length === 0"
+               style="color:#da345a;text-align: justify; direction: rtl;font-family: IranSans;">
               <span>در حال حاضر پرسشی مرتبط ثبت نشده است،</span>
               <span> برای افزودن پرسش مرتبط با این درس آموخته بر روی </span>
               <a (click)="onPostClickPage('QA')">ایجاد پرسش</a>
@@ -129,6 +141,12 @@
           </mat-tab>
         </mat-tab-group>
       </div>
+    </div>
+  </mat-card>
+  <mat-card *ngIf="kmsService.relatedLessons.length > 0" fxLayout="column" fxLayoutAlign="center end">
+    <label for="lessonLearned">لیست درس آموخته های مرتبط با این نویسنده :</label>
+    <div id="lessonLearned" *ngFor="let rl of kmsService.relatedLessons">
+      <button mat-button color="primary" (click)="onPostClickForRelated(rl.ID)">{{rl.Title}}</button>
     </div>
   </mat-card>
 </div>
