@@ -31,7 +31,7 @@
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
-    "highcharts": "^7.0.1",
+    "highcharts": "^9.0.0",
     "highcharts-angular": "^2.4.0",
     "jalali-moment": "^3.2.3",
     "ng-knife": "^0.2.8",
